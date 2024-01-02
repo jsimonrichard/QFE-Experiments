@@ -1,0 +1,6 @@
+pennylane
+torch
+numpy
+matplotlib
+ipykernel
+jupyterlab
