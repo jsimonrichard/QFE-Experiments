@@ -4,3 +4,4 @@ numpy
 matplotlib
 ipykernel
 jupyterlab
+torch_geometric
