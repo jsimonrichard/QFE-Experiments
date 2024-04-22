@@ -3,3 +3,5 @@ qugcn_venv
 qiskit_qml
 fil-result/
 data/
+__pycache__/
+.env
