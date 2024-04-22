@@ -1,0 +1,3 @@
+[submodule "HGP-SL"]
+	path = HGP-SL
+	url = git@github.com:jsimonrichard/HGP-SL.git
