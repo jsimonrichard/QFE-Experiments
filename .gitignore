@@ -1,7 +1,16 @@
 .ipynb_checkpoints
-qugcn_venv
-qiskit_qml
-fil-result/
-data/
 __pycache__/
 .env
+
+# Venv
+qfe_exp_venv/
+qiskit_qml/
+
+# Profiling results
+fil-result/
+
+# Dataset downloads
+data/
+
+# Comet ml offline runs
+.cometml-runs/
