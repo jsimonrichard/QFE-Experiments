@@ -1,6 +1,12 @@
 .ipynb_checkpoints
 __pycache__/
 .env
+.comet.config
+
+# Training and tuning outputs
+checkpoints/
+process_out/
+optuna_studies.db
 
 # Venv
 qfe_exp_venv/

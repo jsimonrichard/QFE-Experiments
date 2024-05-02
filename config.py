@@ -2,24 +2,24 @@ import argparse
 from enum import Enum
 from copy import deepcopy
 
-class Dataset(Enum):
+class Dataset(str, Enum):
     PROTEINS = "PROTEINS"
     ENZYMES = "ENZYMES"
 
-class Embedding(Enum):
+class Embedding(str, Enum):
     QFE_EXP = "QFE-exp"
     QFE_PROBS = "QFE-probs"
     MLP_2_D = "MLP-2^D"
     MLP_D = "MLP-D"
     NONE = "none"
 
-class ClassicalModel(Enum):
+class ClassicalModel(str, Enum):
     GCN = "GCN"
     GraphConv = "GraphConv"
     GraphSAGE = "GraphSAGE"
     GAT = "GAT"
 
-class Pooling(Enum):
+class Pooling(str, Enum):
     SUM = "sum"
     MEAN = "mean"
     MAX = "max"
@@ -37,7 +37,7 @@ class EnumAction(argparse.Action):
         setattr(namespace, self.dest, enum_value)
 
 def get_parser():
-    parser = argparse.ArgumentParser(description="Process some datasets.")
+    parser = argparse.ArgumentParser(description="Graph Classification")
     parser.add_argument('--seed', type=int, default=42, help='Random seed')
     parser.add_argument('--device', type=str, default='cuda:0', help='Device')
     parser.add_argument('--dataset', action=EnumAction, enum_type=Dataset, required=True,
@@ -55,20 +55,20 @@ def get_parser():
                         help='Choose a dataset from: %(choices)s')
     parser.add_argument('--epochs', type=int, default=200, help='Number of epochs')
     parser.add_argument('--patience', type=int, default=30, help='Patience')
-    parser.add_argument('--batch_size', type=int, default=2048, help='Batch size')
+    parser.add_argument('--batch-size', type=int, default=2048, help='Batch size')
     parser.add_argument('--lr', type=float, default=0.001, help='Learning rate')
-    parser.add_argument('--weight_decay', type=float, default=5e-4, help='Weight decay')
+    parser.add_argument('--weight-decay', type=float, default=5e-4, help='Weight decay')
     parser.add_argument('--exp-key', type=str, help='Output directory')
     parser.add_argument('--start-from', type=str, help='Start from a checkpoint')
-    parser.add_argument('--offline', action='store_true', help='Do not log to CometML')
-    parser.add_argument('--dont-log', action='store_true', help='Do not log to CometML or TensorBoard')
-
+    parser.add_argument('--comet-ml', action='store_true', help='Log to CometML')
+    parser.add_argument('--offline', action='store_true', help='Use CometML offline')
+    
     # HGP-SL parameters
-    parser.add_argument('--sample_neighbor', type=bool, default=True, help='whether sample neighbors')
-    parser.add_argument('--sparse_attention', type=bool, default=True, help='whether use sparse attention')
-    parser.add_argument('--structure_learning', type=bool, default=True, help='whether perform structure learning')
-    parser.add_argument('--pooling_ratio', type=float, default=0.5, help='pooling ratio')
-    parser.add_argument('--dropout_ratio', type=float, default=0.0, help='dropout ratio')
+    parser.add_argument('--sample-neighbor', type=bool, default=True, help='whether sample neighbors')
+    parser.add_argument('--sparse-attention', type=bool, default=True, help='whether use sparse attention')
+    parser.add_argument('--structure-learning', type=bool, default=True, help='whether perform structure learning')
+    parser.add_argument('--pooling-ratio', type=float, default=0.5, help='pooling ratio')
+    parser.add_argument('--dropout-ratio', type=float, default=0.0, help='dropout ratio')
     parser.add_argument('--lamb', type=float, default=1.0, help='trade-off parameter')
 
     return parser
@@ -78,19 +78,39 @@ def get_args():
     args = parser.parse_args()
     return args
 
+
 def gen_args(
         dataset: Dataset,
         embedding: Embedding,
         model: ClassicalModel,
         pooling: Pooling,
+        layers: int = 8,
+        qfe_layers: int = 2,
+        hidden: int = 64,
+        dropout: float = 0.1,
+        lr: float = 0.001,
+        weight_decay: float = 5e-4,
+        batch_size: int = 2048,
+        comet_ml = False
 ):
     parser = get_parser()
-    args = parser.parse_args([
+    cli_args = [
         "--dataset", dataset.value,
         "--embedding", embedding.value,
         "--model", model.value,
-        "--pooling", pooling.value
-    ])
+        "--pooling", pooling.value,
+        "--layers", str(layers),
+        "--hidden", str(hidden),
+        "--dropout", str(dropout),
+        "--lr", str(lr),
+        "--weight-decay", str(weight_decay),
+        "--batch-size", str(batch_size),
+        "--qml-embedding-layers", str(qfe_layers)
+    ]
+    if comet_ml:
+        cli_args.append("--comet-ml")
+
+    args = parser.parse_args(cli_args)
     return args
 
 def get_hparams_from_args(args):

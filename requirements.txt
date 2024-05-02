@@ -8,3 +8,8 @@ comet_ml==3.41.0
 python-dotenv==1.0.1
 torch_scatter==2.1.2
 torch_sparse==0.6.18
+cookiecutter>1.7.0
+optima==0.1.2
+optima==0.15.1
+fvcore==0.1.5
+psycopg2==2.9.9
