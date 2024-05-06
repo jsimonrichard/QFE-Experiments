@@ -1,13 +1,12 @@
 import torch
 from torch_geometric.loader import DataLoader
-from sklearn.model_selection import ShuffleSplit
+from sklearn.model_selection import StratifiedKFold
 import os, random, string
-from statsmodels.stats.proportion import proportion_confint
 import numpy as np
 from scipy.stats import bootstrap
 
 from train import setup_comet_experiment, train, test, get_flops
-from config import get_args, Pooling
+from config import get_args, Embedding
 from model import build_model
 from dataset import get_dataset
 
@@ -33,16 +32,16 @@ def run_test(args):
 
     # Get dataset
     train_ds, test_ds = get_dataset(args)
-    rs = ShuffleSplit(n_splits=1, test_size=1/8, random_state=args.seed)
-    train_index, val_index = next(rs.split(train_ds))
 
-    train_loader = DataLoader(train_ds[train_index], batch_size=args.batch_size, shuffle=True)
-    val_loader = DataLoader(train_ds[val_index], batch_size=args.batch_size, shuffle=False)
     test_loader = DataLoader(test_ds, batch_size=args.batch_size, shuffle=False)
 
     accuracies = []
-    errors = []
-    for i in range(10):
+    skf = StratifiedKFold(n_splits=args.k_folds, shuffle=True, random_state=args.seed)
+    for fold, (train_index, val_index) in enumerate(skf.split(train_ds, train_ds.y)):
+        
+        train_loader = DataLoader(train_ds[train_index], batch_size=args.batch_size, shuffle=True)
+        val_loader = DataLoader(train_ds[val_index], batch_size=args.batch_size, shuffle=False)
+        
         # Handle Restarts
         model_checkpoint = None
         if args.exp_key:
@@ -66,49 +65,22 @@ def run_test(args):
         correct = (actual == predicted).sum()
         total = len(actual)
 
-        print(f"Test {i}: Accuracy (before CI): {correct}/{total} ({acc})")
-
-        ci_low, ci_high = proportion_confint(
-            correct,
-            total,
-            alpha=0.05,
-            method="wilson"
-        )
-        print(f"Wilson Confidence Interval: ({ci_low}, {ci_high})")
-        
-        acc = (ci_high + ci_low) / 2
-        e = (ci_high - ci_low) / 2
-
         accuracies.append(acc)
-        errors.append(e)
+
+        print(f"Fold {fold} Accuracy: {correct}/{total} ({acc})")
         
     # Bootstrap the accuracies to get confidence interval
     res = bootstrap((accuracies,), np.mean, confidence_level=0.95)
-    m = (res.confidence_interval.low + res.confidence_interval.high)/2
+    acc = (res.confidence_interval.low + res.confidence_interval.high)/2
     e = (res.confidence_interval.high - res.confidence_interval.low)/2
-    print(f"Bootstrap: {m} plus.minus {e}")
-
-    ci_low, ci_high = proportion_confint(
-        total*m,
-        total,
-        alpha=0.05,
-        method="wilson"
-    )
-    print(f"Wilson Confidence Interval (from bootstrap acc): ({ci_low}, {ci_high})")
-        
-    acc = (ci_high + ci_low) / 2
-    e = (ci_high - ci_low) / 2
-
-    print("Accuracy:", acc)
-    print("Error:", e)
 
     if cml_exp:
         cml_exp.log_metric("accuracy", acc)
         cml_exp.log_metric("accuracy_error", e)
         
-    # Use last model (or a new non-quantum model) to measure Flops
-    if args.pooling.value.split("-")[0] == "QFE":
-        args.pooling = Pooling.NONE
+    # Use last model (or a new non-quantum) to measure classical Flops
+    if args.embedding.value.split("-")[0] == "QFE":
+        args.embedding = Embedding.NONE
         model = build_model(args, train_ds.num_features, train_ds.num_classes).to(device)    
     
     case = test_ds[0]

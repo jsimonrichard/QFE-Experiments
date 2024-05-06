@@ -13,7 +13,7 @@ import random
 from fvcore.nn import FlopCountAnalysis
 import optuna
 
-from config import get_args, get_hparams_from_args, Pooling
+from config import get_args, get_hparams_from_args, Embedding
 from model import build_model
 from dataset import get_dataset
 
@@ -234,9 +234,9 @@ def run_experiment(args, trial=None):
         cml_exp.log_metric("accuracy", m)
         cml_exp.log_metric("accuracy_error", e)
 
-    # Use last model (or a new non-quantum model) to measure Flops
-    if args.pooling.value.split("-")[0] == "QFE":
-        args.pooling = Pooling.NONE
+    # Use last model (or a new non-quantum) to measure classical Flops
+    if args.embedding.value.split("-")[0] == "QFE":
+        args.embedding = Embedding.NONE
         model = build_model(args, train_ds.num_features, train_ds.num_classes).to(device)
 
     case = test_ds[0]
