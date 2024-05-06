@@ -9,8 +9,7 @@ from config import Dataset, Embedding, ClassicalModel, Pooling, gen_args, EnumAc
 from train import run_experiment
 
 
-def objective(trial, pre_args, count_flops=False):
-
+def objective(trial, pre_args):
 
     process_name = f"process_out/{pre_args.dataset.value}_{pre_args.embedding.value}"
     
@@ -59,7 +58,7 @@ def objective(trial, pre_args, count_flops=False):
         weight_decay=trial.suggest_float("weight_decay", 1e-5, 1e-3, log=True),
         batch_size=trial.suggest_categorical("batch_size", [512, 1024, 2048])
     )
-    return run_experiment(args, count_flops=count_flops)
+    return run_experiment(args)
 
 if __name__ == "__main__":
     load_dotenv() 
@@ -75,17 +74,13 @@ if __name__ == "__main__":
     os.makedirs("optuna_studies", exist_ok=True)
     os.makedirs("process_out", exist_ok=True)
 
-    directions = ["maximize", "minimize"]
-    if args.embedding.value.split("-")[0] != "QFE":
-        directions.append("minimize")
-
     optuna.logging.get_logger("optuna").addHandler(logging.StreamHandler(sys.stdout))
-    study_name = f"{args.dataset.value}_{args.embedding.value}_{'hgp-sl' if args.hgp_sl else 'simple-pooling'}"
+    study_name = f"{args.dataset.value}_{args.embedding.value}_{'hgp-sl' if args.hgp_sl else 'simple-pooling'}-0.2_test"
     study = optuna.create_study(
         study_name=study_name,
         storage=os.getenv("OPTUNA_DB"),
         load_if_exists=True,
-        directions=directions, 
+        directions=["maximize", "minimize", "minimize"], 
         pruner=optuna.pruners.MedianPruner( # Will operate on the accuracies of each fold
             n_startup_trials=10,
             n_warmup_steps=4,
@@ -93,6 +88,4 @@ if __name__ == "__main__":
         )
     )
 
-    count_flops = args.embedding.value.split("-")[0] != "QFE"
-
-    study.optimize(lambda trial: objective(trial, args, count_flops), n_trials=500, n_jobs=1)
+    study.optimize(lambda trial: objective(trial, args), n_trials=500, n_jobs=1)

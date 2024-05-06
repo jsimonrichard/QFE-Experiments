@@ -13,8 +13,9 @@ import random
 from fvcore.nn import FlopCountAnalysis
 import optuna
 
-from config import Dataset, Embedding, ClassicalModel, Pooling, get_args, get_hparams_from_args
+from config import get_args, get_hparams_from_args, Pooling
 from model import build_model
+from dataset import get_dataset
 
 def setup_comet_experiment(args):
     # Prepare CometML
@@ -145,7 +146,7 @@ def get_flops(model, device, x, edge_index, batch=None):
         None if batch is None else batch.to(device)
     )).total()
 
-def run_experiment(args, trial=None, count_flops=False):
+def run_experiment(args, trial=None):
     cml_exp = None
     if args.comet_ml:
         cml_exp = setup_comet_experiment(args)
@@ -166,11 +167,7 @@ def run_experiment(args, trial=None, count_flops=False):
     device = torch.device(args.device)
 
     # Get dataset
-    ds = TUDataset(root="data", name=args.dataset.value, use_node_attr=True)
-    rs = ShuffleSplit(n_splits=1, test_size=0.1, random_state=args.seed)
-    train_index, test_index = next(rs.split(ds))
-    del test_index # not used in this script; written out for clarity
-    train_ds = ds[train_index]
+    train_ds, test_ds = get_dataset(args)
 
     k_fold_accuracies = []
 
@@ -197,7 +194,7 @@ def run_experiment(args, trial=None, count_flops=False):
         val_loader = DataLoader(val_dataset, batch_size=args.batch_size, shuffle=False)
 
         # Get model
-        model = build_model(args, ds.num_features, ds.num_classes).to(device) 
+        model = build_model(args, train_ds.num_features, train_ds.num_classes).to(device) 
         if model_checkpoint is not None:
             model.load_state_dict(model_checkpoint["model_state_dict"])
         
@@ -237,13 +234,14 @@ def run_experiment(args, trial=None, count_flops=False):
         cml_exp.log_metric("accuracy", m)
         cml_exp.log_metric("accuracy_error", e)
 
-    # Use last model to measure Flops
-    if count_flops:
-        case = ds[train_index[0]]
-        flops = get_flops(model, device, case.x, case.edge_index, batch=case.batch)
-        return m, e, flops
-    else:
-        return m, e
+    # Use last model (or a new non-quantum model) to measure Flops
+    if args.pooling.value.split("-")[0] == "QFE":
+        args.pooling = Pooling.NONE
+        model = build_model(args, train_ds.num_features, train_ds.num_classes).to(device)
+
+    case = test_ds[0]
+    flops = get_flops(model, device, case.x, case.edge_index, batch=case.batch)
+    return m, e, flops
 
 
 if __name__ == "__main__":
