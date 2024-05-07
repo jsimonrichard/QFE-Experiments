@@ -13,3 +13,4 @@ optima==0.1.2
 optima==0.15.1
 fvcore==0.1.5
 psycopg2==2.9.9
+statsmodels==0.14.2

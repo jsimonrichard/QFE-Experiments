@@ -1,9 +1,11 @@
+import comet_ml
 import torch
 from torch_geometric.loader import DataLoader
 from sklearn.model_selection import StratifiedKFold
 import os, random, string
 import numpy as np
 from scipy.stats import bootstrap
+from statsmodels.stats.proportion import proportion_confint
 
 from train import setup_comet_experiment, train, test, get_flops
 from config import get_args, Embedding
@@ -57,13 +59,17 @@ def run_test(args):
 
         model = train(
             model, device, train_loader, val_loader,
-            args, 0, exp_key=exp_key, cml_exp=cml_exp,
+            args, fold, exp_key=exp_key, cml_exp=cml_exp,
             model_checkpoint=model_checkpoint
         )
 
         acc, _, actual, predicted = test(model, device, test_loader)
         correct = (actual == predicted).sum()
         total = len(actual)
+
+        if cml_exp:
+            cml_exp.log_metric(f"fold-{fold}/test/accuracy", acc)
+            cml_exp.log_confusion_matrix(actual, predicted, file_name=f"fold-{fold}-test-confusion_matrix.json")
 
         accuracies.append(acc)
 
@@ -78,6 +84,16 @@ def run_test(args):
         cml_exp.log_metric("accuracy", acc)
         cml_exp.log_metric("accuracy_error", e)
         
+    ci_low, ci_high = proportion_confint(acc*total, total, alpha=0.05, method="wilson")
+    wilson_acc = (ci_low + ci_high)/2
+    wilson_e = (ci_high - ci_low)/2
+
+    if cml_exp:
+        cml_exp.log_metric("accuracy_wilson_low", ci_low)
+        cml_exp.log_metric("accuracy_wilson_high", ci_high)
+        cml_exp.log_metric("accuracy_wilson", wilson_acc)
+        cml_exp.log_metric("accuracy_wilson_error", wilson_e)
+
     # Use last model (or a new non-quantum) to measure classical Flops
     if args.embedding.value.split("-")[0] == "QFE":
         args.embedding = Embedding.NONE
@@ -87,11 +103,13 @@ def run_test(args):
     flops = get_flops(model, device, case.x, case.edge_index, batch=case.batch)
     if cml_exp:
         cml_exp.log_metric("flops", flops)
-    return acc, e, flops
+    return acc, e, wilson_acc, wilson_e, flops
 
 if __name__ == "__main__":
     args = get_args()
-    acc, error, flops = run_test(args)
+    acc, error, wilson_acc, wilson_e, flops = run_test(args)
     print("Acc:", acc)
     print("Error:", error)
+    print("Wilson Acc:", wilson_acc)
+    print("Wilson Error:", wilson_e)
     print("Flops:", flops)
