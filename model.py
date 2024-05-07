@@ -30,7 +30,7 @@ class QFE_MeasureMethod(Enum):
 def build_qfe_circuit(dev, n_qubits, n_layers, qfe_method: QFE_MeasureMethod):
     @qml.qnode(dev, interface="torch") #, diff_method="parameter-shift")
     def qfe_circuit(inputs, weights):
-        qml.templates.AngleEmbedding(inputs, wires=range(n_qubits))
+        qml.templates.AngleEmbedding(inputs, wires=range(n_qubits), rotation='Y')
         # Ranges of 1 are used to closely match the figures in the QFE paper
         qml.templates.StronglyEntanglingLayers(weights, ranges=[1]*n_layers, wires=range(n_qubits))
 
