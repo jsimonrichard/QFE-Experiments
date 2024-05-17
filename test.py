@@ -7,7 +7,7 @@ import numpy as np
 from scipy.stats import bootstrap
 from statsmodels.stats.proportion import proportion_confint
 
-from train import setup_comet_experiment, train, test, get_flops
+from train import setup_comet_experiment, train, test, count_parameters
 from config import get_args, Embedding
 from model import build_model
 from dataset import get_dataset
@@ -88,28 +88,22 @@ def run_test(args):
     wilson_acc = (ci_low + ci_high)/2
     wilson_e = (ci_high - ci_low)/2
 
+    param_count = count_parameters(model)
+
     if cml_exp:
         cml_exp.log_metric("accuracy_wilson_low", ci_low)
         cml_exp.log_metric("accuracy_wilson_high", ci_high)
         cml_exp.log_metric("accuracy_wilson", wilson_acc)
         cml_exp.log_metric("accuracy_wilson_error", wilson_e)
+        cml_exp.log_metric("param_count", param_count)
 
-    # Use last model (or a new non-quantum) to measure classical Flops
-    if args.embedding.value.split("-")[0] == "QFE":
-        args.embedding = Embedding.NONE
-        model = build_model(args, train_ds.num_features, train_ds.num_classes).to(device)    
-    
-    case = test_ds[0]
-    flops = get_flops(model, device, case.x, case.edge_index, batch=case.batch)
-    if cml_exp:
-        cml_exp.log_metric("flops", flops)
-    return acc, e, wilson_acc, wilson_e, flops
+    return acc, e, wilson_acc, wilson_e, param_count
 
 if __name__ == "__main__":
     args = get_args()
-    acc, error, wilson_acc, wilson_e, flops = run_test(args)
+    acc, error, wilson_acc, wilson_e, param_count = run_test(args)
     print("Acc:", acc)
     print("Error:", error)
     print("Wilson Acc:", wilson_acc)
     print("Wilson Error:", wilson_e)
-    print("Flops:", flops)
+    print("Parameters:", param_count)

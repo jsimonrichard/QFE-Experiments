@@ -1,0 +1,14 @@
+services:
+  optuna-db:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: optuna
+      POSTGRES_PASSWORD: optuna
+      POSTGRES_DB: optuna
+    ports:
+      - "5432:5432"
+    volumes:
+      - optuna-db-data:/var/lib/postgresql/data
+
+volumes:
+  optuna-db-data:

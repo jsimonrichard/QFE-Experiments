@@ -138,13 +138,9 @@ def test(model, device, data_loader):
 
     return acc, avg_loss, actual.to("cpu", dtype=torch.int), predicted.to("cpu", dtype=torch.int)
 
-def get_flops(model, device, x, edge_index, batch=None):
-    model.eval()
-    return FlopCountAnalysis(model, inputs=(
-        x.to(device),
-        edge_index.to(device),
-        None if batch is None else batch.to(device)
-    )).total()
+# https://discuss.pytorch.org/t/how-do-i-check-the-number-of-parameters-of-a-model/4325/7
+def count_parameters(model):
+    return sum(p.numel() for p in model.parameters() if p.requires_grad)
 
 def run_experiment(args, trial=None):
     cml_exp = None
@@ -230,18 +226,15 @@ def run_experiment(args, trial=None):
     e = (res.confidence_interval.high - res.confidence_interval.low)/2
     print(f"Accuracy: {m} plus.minus {e}")
 
+    param_count = count_parameters(model)
+    print(f"Model has {param_count} parameters")
+
     if cml_exp:
         cml_exp.log_metric("accuracy", m)
         cml_exp.log_metric("accuracy_error", e)
+        cml_exp.log_metric("param_count", param_count)
 
-    # Use last model (or a new non-quantum) to measure classical Flops
-    if args.embedding.value.split("-")[0] == "QFE":
-        args.embedding = Embedding.NONE
-        model = build_model(args, train_ds.num_features, train_ds.num_classes).to(device)
-
-    case = test_ds[0]
-    flops = get_flops(model, device, case.x, case.edge_index, batch=case.batch)
-    return m, e, flops
+    return m, e, param_count
 
 
 if __name__ == "__main__":
