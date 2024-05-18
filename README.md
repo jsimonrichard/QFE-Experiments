@@ -5,7 +5,7 @@ While the venv is activated:
 python -m ipykernel install --user --name=qugcn_venv
 ```
 
-Do not do this is using vscode. It will detect the python venv on its own; installing the kernel will just make it show up twice.
+Do not do this if using vscode. It will detect the python venv on its own; installing the kernel will just make it show up twice.
 
 ## Running Optuna with Docker Compose
 
