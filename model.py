@@ -80,7 +80,7 @@ def build_embedder(args, features):
     # Build Embedder
     if args.embedder.value.split("-")[0] == "QFE":
         qfe_method = QFE_MeasureMethod[args.embedder.value.split("-")[1].upper()]
-        return QFE(features, args.qml_embedder_layers, qfe_method)
+        return QFE(features, args.qfe_layers, qfe_method)
     elif args.embedder.value.split("-")[0] == "MLP":
         mlp_type = args.embedder.value.split("-")[1]
         hidden_neurons = 2 ** features if mlp_type == "2^D" else features

@@ -45,7 +45,7 @@ def get_parser():
     parser.add_argument('--k-folds', type=int, default=5, help='Number of folds for stratified k-fold cross-validation')
     parser.add_argument('--embedder', action=EnumAction, enum_type=Embedder, required=True,
                         help='Choose a dataset from: %(choices)s')
-    parser.add_argument('--qml-embedder-layers', type=int, default=2, help='Number of layers to use in the QML circuit')
+    parser.add_argument('--qfe-layers', type=int, default=2, help='Number of layers to use in the QFE circuit')
     parser.add_argument('--model', action=EnumAction, enum_type=ClassicalModel, required=True,
                         help='Choose a dataset from: %(choices)s')
     parser.add_argument('--layers', type=int, default=8, help='Number of layers')
@@ -105,7 +105,7 @@ def gen_args(
         "--lr", str(lr),
         "--weight-decay", str(weight_decay),
         "--batch-size", str(batch_size),
-        "--qml-embedder-layers", str(qfe_layers)
+        "--qfe-layers", str(qfe_layers)
     ]
     if comet_ml:
         cli_args.append("--comet-ml")
