@@ -13,3 +13,7 @@ Do not do this if using vscode. It will detect the python venv on its own; insta
 docker compose up -d
 ./optuna_dashboard.sh
 ```
+
+## Reproducibility Issues
+
+I was unable to achieve completely reproducible runs on my machine, but your milage may vary.
