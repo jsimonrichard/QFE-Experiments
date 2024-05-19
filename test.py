@@ -8,7 +8,7 @@ from scipy.stats import bootstrap
 from statsmodels.stats.proportion import proportion_confint
 
 from train import setup_comet_experiment, train, test, count_parameters
-from config import get_args, Embedding
+from config import get_args, Embedder
 from model import build_model
 from dataset import get_dataset
 

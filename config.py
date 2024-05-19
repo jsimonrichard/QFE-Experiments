@@ -6,7 +6,7 @@ class Dataset(str, Enum):
     PROTEINS = "PROTEINS"
     ENZYMES = "ENZYMES"
 
-class Embedding(str, Enum):
+class Embedder(str, Enum):
     QFE_EXP = "QFE-exp"
     QFE_PROBS = "QFE-probs"
     MLP_2_D = "MLP-2^D"
@@ -42,10 +42,10 @@ def get_parser():
     parser.add_argument('--device', type=str, default='cuda:0', help='Device')
     parser.add_argument('--dataset', action=EnumAction, enum_type=Dataset, required=True,
                         help='Choose a dataset from: %(choices)s')
-    parser.add_argument('--k-folds', type=int, default=8, help='Number of folds for stratified k-fold cross-validation')
-    parser.add_argument('--embedding', action=EnumAction, enum_type=Embedding, required=True,
+    parser.add_argument('--k-folds', type=int, default=5, help='Number of folds for stratified k-fold cross-validation')
+    parser.add_argument('--embedder', action=EnumAction, enum_type=Embedder, required=True,
                         help='Choose a dataset from: %(choices)s')
-    parser.add_argument('--qml-embedding-layers', type=int, default=2, help='Number of layers to use in the QML circuit')
+    parser.add_argument('--qml-embedder-layers', type=int, default=2, help='Number of layers to use in the QML circuit')
     parser.add_argument('--model', action=EnumAction, enum_type=ClassicalModel, required=True,
                         help='Choose a dataset from: %(choices)s')
     parser.add_argument('--layers', type=int, default=8, help='Number of layers')
@@ -81,7 +81,7 @@ def get_args():
 
 def gen_args(
         dataset: Dataset,
-        embedding: Embedding,
+        embedder: Embedder,
         model: ClassicalModel,
         pooling: Pooling,
         layers: int = 8,
@@ -96,7 +96,7 @@ def gen_args(
     parser = get_parser()
     cli_args = [
         "--dataset", dataset.value,
-        "--embedding", embedding.value,
+        "--embedder", embedder.value,
         "--model", model.value,
         "--pooling", pooling.value,
         "--layers", str(layers),
@@ -105,7 +105,7 @@ def gen_args(
         "--lr", str(lr),
         "--weight-decay", str(weight_decay),
         "--batch-size", str(batch_size),
-        "--qml-embedding-layers", str(qfe_layers)
+        "--qml-embedder-layers", str(qfe_layers)
     ]
     if comet_ml:
         cli_args.append("--comet-ml")

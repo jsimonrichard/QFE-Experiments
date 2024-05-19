@@ -18,7 +18,7 @@ if module_path not in sys.path:
 from layers import HGPSLPool
 from models import Model as HGPSLModel
 
-from config import Embedding, ClassicalModel, Pooling
+from config import Embedder, ClassicalModel, Pooling
 
 
 # EMBEDDINGS
@@ -77,20 +77,20 @@ class MLPEmbedder(Module):
         return x
 
 def build_embedder(args, features):
-    # Build Embedding
-    if args.embedding.value.split("-")[0] == "QFE":
-        qfe_method = QFE_MeasureMethod[args.embedding.value.split("-")[1].upper()]
-        return QFE(features, args.qml_embedding_layers, qfe_method)
-    elif args.embedding.value.split("-")[0] == "MLP":
-        mlp_type = args.embedding.value.split("-")[1]
+    # Build Embedder
+    if args.embedder.value.split("-")[0] == "QFE":
+        qfe_method = QFE_MeasureMethod[args.embedder.value.split("-")[1].upper()]
+        return QFE(features, args.qml_embedder_layers, qfe_method)
+    elif args.embedder.value.split("-")[0] == "MLP":
+        mlp_type = args.embedder.value.split("-")[1]
         hidden_neurons = 2 ** features if mlp_type == "2^D" else features
         # Since the QML embedders can only output the same number of features
         # as the input, we choose the output dimension to be the same as the input
         return MLPEmbedder(features, hidden_neurons, features)
-    elif args.embedding == Embedding.NONE:
+    elif args.embedder == Embedder.NONE:
         return None
     else:
-        raise ValueError(f"Invalid Embedding Type: {args.embedding}")
+        raise ValueError(f"Invalid Embedder Type: {args.embedder}")
 
 # MODELS
 
@@ -127,7 +127,7 @@ class GNNModel(Module):
 
         self.embedder = build_embedder(args, features)
 
-        in_features = 2**features if args.embedding == Embedding.QFE_PROBS else features
+        in_features = 2**features if args.embedder == Embedder.QFE_PROBS else features
 
         self.model = models[args.model](
             in_channels=in_features,

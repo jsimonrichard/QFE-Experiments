@@ -13,7 +13,7 @@ import random
 from fvcore.nn import FlopCountAnalysis
 import optuna
 
-from config import get_args, get_hparams_from_args, Embedding
+from config import get_args, get_hparams_from_args, Embedder
 from model import build_model
 from dataset import get_dataset
 
@@ -156,19 +156,29 @@ def run_experiment(args, trial=None):
                                 string.digits, k=16))
 
     # Reproducibility
-    torch.manual_seed(args.seed)
-    if torch.cuda.is_available():
-        torch.cuda.manual_seed(args.seed)
+    if args.seed:
+        # random.seed(args.seed) # this could mess up the exp_key generation above
+        np.random.seed(args.seed)
+        torch.manual_seed(args.seed)
+        if torch.cuda.is_available():
+            torch.cuda.manual_seed_all(args.seed)
+            torch.backends.cudnn.deterministic = True
+            torch.backends.cudnn.benchmark = False
 
     device = torch.device(args.device)
 
     # Get dataset
-    train_ds, test_ds = get_dataset(args)
+    ds = get_dataset(args.dataset)
+
+    skf = StratifiedKFold(n_splits=args.k_folds, shuffle=True, random_state=args.seed)
+
+    train_index, test_index = next(skf.split(ds, ds.y))
+    train_ds = ds[train_index]
+    del test_index
 
     k_fold_accuracies = []
 
     # Setup the K-Folded Experiments
-    skf = StratifiedKFold(n_splits=args.k_folds, shuffle=True, random_state=args.seed)
     for fold, (train_index, val_index) in enumerate(skf.split(train_ds, train_ds.y)):
         print(f"Fold {fold}")
 
@@ -212,11 +222,6 @@ def run_experiment(args, trial=None):
         if cml_exp:
             cml_exp.log_metric(f"fold-{fold}/test/accuracy", acc)
             cml_exp.log_confusion_matrix(actual, predicted, file_name=f"fold-{fold}-test-confusion_matrix.json")
-
-        if trial:
-            trial.report(acc, fold)
-            if trial.should_prune():
-                raise optuna.TrialPruned()
 
         k_fold_accuracies.append(acc)
 
