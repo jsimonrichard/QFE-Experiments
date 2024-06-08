@@ -1,0 +1,1655 @@
+{
+    "best_trials": {
+        "QFE-exp": {
+            "best_all": [
+                {
+                    "number": 32,
+                    "validation_results": [
+                        0.6926966292134831,
+                        0.021910112359550538,
+                        1870.0
+                    ],
+                    "params": {
+                        "pooling": "mean",
+                        "model": "GAT",
+                        "qfe_layers": 4,
+                        "layers": 5,
+                        "hidden": 22,
+                        "dropout": 0.4985087455038765,
+                        "lr": 0.005213996756466823,
+                        "weight_decay": 1.2007221041133937e-05
+                    }
+                },
+                {
+                    "number": 202,
+                    "validation_results": [
+                        0.6915730337078652,
+                        0.007303370786516883,
+                        40843.0
+                    ],
+                    "params": {
+                        "pooling": "max",
+                        "model": "GCN",
+                        "qfe_layers": 4,
+                        "layers": 5,
+                        "hidden": 115,
+                        "dropout": 0.1568052421568233,
+                        "lr": 0.0008328375594975408,
+                        "weight_decay": 1.588415015124416e-05
+                    }
+                },
+                {
+                    "number": 228,
+                    "validation_results": [
+                        0.6556179775280899,
+                        0.014044943820224753,
+                        1661.0
+                    ],
+                    "params": {
+                        "pooling": "sum",
+                        "model": "GAT",
+                        "qfe_layers": 2,
+                        "layers": 2,
+                        "hidden": 183,
+                        "dropout": 0.022789510340641028,
+                        "lr": 0.005381978135467261,
+                        "weight_decay": 1.4616589340616312e-05
+                    }
+                },
+                {
+                    "number": 153,
+                    "validation_results": [
+                        0.714214424706547,
+                        0.012751867428284491,
+                        91610.0
+                    ],
+                    "params": {
+                        "pooling": "max",
+                        "model": "GCN",
+                        "qfe_layers": 2,
+                        "layers": 11,
+                        "hidden": 100,
+                        "dropout": 0.021612240458739662,
+                        "lr": 0.0003028347804333664,
+                        "weight_decay": 6.876110686678228e-05
+                    }
+                },
+                {
+                    "number": 136,
+                    "validation_results": [
+                        0.7057843198794802,
+                        0.019267465946896045,
+                        9742.0
+                    ],
+                    "params": {
+                        "pooling": "max",
+                        "model": "GAT",
+                        "qfe_layers": 4,
+                        "layers": 5,
+                        "hidden": 54,
+                        "dropout": 0.29262112682761426,
+                        "lr": 0.0037165355599127143,
+                        "weight_decay": 4.235499403351109e-05
+                    }
+                }
+            ],
+            "best_acc": [
+                {
+                    "number": 191,
+                    "validation_results": [
+                        0.7162921348314607,
+                        0.04325842696629223,
+                        30544.0
+                    ],
+                    "params": {
+                        "pooling": "max",
+                        "model": "GCN",
+                        "qfe_layers": 3,
+                        "layers": 6,
+                        "hidden": 86,
+                        "dropout": 0.18030420068343683,
+                        "lr": 0.000808509514530729,
+                        "weight_decay": 1.3412599775941367e-05
+                    }
+                },
+                {
+                    "number": 150,
+                    "validation_results": [
+                        0.7213483146067415,
+                        0.017977528089887618,
+                        539795.0
+                    ],
+                    "params": {
+                        "pooling": "max",
+                        "model": "GCN",
+                        "qfe_layers": 4,
+                        "layers": 15,
+                        "hidden": 203,
+                        "dropout": 0.013524547892914185,
+                        "lr": 0.00013094803228686872,
+                        "weight_decay": 2.2222057189600828e-05
+                    }
+                },
+                {
+                    "number": 93,
+                    "validation_results": [
+                        0.7011235955056181,
+                        0.02022471910112361,
+                        70893.0
+                    ],
+                    "params": {
+                        "pooling": "max",
+                        "model": "GAT",
+                        "qfe_layers": 3,
+                        "layers": 14,
+                        "hidden": 75,
+                        "dropout": 0.28254175474246124,
+                        "lr": 0.000722933903262049,
+                        "weight_decay": 7.063559832956515e-05
+                    }
+                },
+                {
+                    "number": 153,
+                    "validation_results": [
+                        0.714214424706547,
+                        0.012751867428284491,
+                        91610.0
+                    ],
+                    "params": {
+                        "pooling": "max",
+                        "model": "GCN",
+                        "qfe_layers": 2,
+                        "layers": 11,
+                        "hidden": 100,
+                        "dropout": 0.021612240458739662,
+                        "lr": 0.0003028347804333664,
+                        "weight_decay": 6.876110686678228e-05
+                    }
+                },
+                {
+                    "number": 136,
+                    "validation_results": [
+                        0.7057843198794802,
+                        0.019267465946896045,
+                        9742.0
+                    ],
+                    "params": {
+                        "pooling": "max",
+                        "model": "GAT",
+                        "qfe_layers": 4,
+                        "layers": 5,
+                        "hidden": 54,
+                        "dropout": 0.29262112682761426,
+                        "lr": 0.0037165355599127143,
+                        "weight_decay": 4.235499403351109e-05
+                    }
+                }
+            ],
+            "low_params": [
+                {
+                    "number": 36,
+                    "validation_results": [
+                        0.702247191011236,
+                        0.03483146067415732,
+                        963.0
+                    ],
+                    "params": {
+                        "pooling": "max",
+                        "model": "GraphConv",
+                        "qfe_layers": 3,
+                        "layers": 2,
+                        "hidden": 73,
+                        "dropout": 0.2847063628818189,
+                        "lr": 0.0014786550451404016,
+                        "weight_decay": 1.3968464632986903e-05
+                    }
+                },
+                {
+                    "number": 80,
+                    "validation_results": [
+                        0.7191011235955056,
+                        0.023595505617977575,
+                        21131.0
+                    ],
+                    "params": {
+                        "pooling": "max",
+                        "model": "GCN",
+                        "qfe_layers": 4,
+                        "layers": 13,
+                        "hidden": 43,
+                        "dropout": 0.375429211107452,
+                        "lr": 0.00047012635559826976,
+                        "weight_decay": 5.803058317603471e-05
+                    }
+                },
+                {
+                    "number": 217,
+                    "validation_results": [
+                        0.6741573033707864,
+                        0.02471910112359549,
+                        1858.0
+                    ],
+                    "params": {
+                        "pooling": "max",
+                        "model": "GAT",
+                        "qfe_layers": 4,
+                        "layers": 2,
+                        "hidden": 204,
+                        "dropout": 0.3604202093782143,
+                        "lr": 0.0009361588948218287,
+                        "weight_decay": 0.000685492250251456
+                    }
+                },
+                {
+                    "number": 201,
+                    "validation_results": [
+                        0.6940116753499467,
+                        0.02733663925679497,
+                        10814.0
+                    ],
+                    "params": {
+                        "pooling": "max",
+                        "model": "GCN",
+                        "qfe_layers": 3,
+                        "layers": 3,
+                        "hidden": 100,
+                        "dropout": 0.1278978271925788,
+                        "lr": 0.002958228242564275,
+                        "weight_decay": 7.680453122500267e-05
+                    }
+                },
+                {
+                    "number": 136,
+                    "validation_results": [
+                        0.7057843198794802,
+                        0.019267465946896045,
+                        9742.0
+                    ],
+                    "params": {
+                        "pooling": "max",
+                        "model": "GAT",
+                        "qfe_layers": 4,
+                        "layers": 5,
+                        "hidden": 54,
+                        "dropout": 0.29262112682761426,
+                        "lr": 0.0037165355599127143,
+                        "weight_decay": 4.235499403351109e-05
+                    }
+                }
+            ]
+        },
+        "QFE-probs": {
+            "best_all": [
+                {
+                    "number": 198,
+                    "validation_results": [
+                        0.7174157303370786,
+                        0.021910112359550538,
+                        17599.0
+                    ],
+                    "params": {
+                        "pooling": "max",
+                        "model": "GCN",
+                        "qfe_layers": 1,
+                        "layers": 5,
+                        "hidden": 73,
+                        "dropout": 0.40633012162881404,
+                        "lr": 0.004258907133481044,
+                        "weight_decay": 0.00012891905697404247
+                    }
+                },
+                {
+                    "number": 127,
+                    "validation_results": [
+                        0.7146067415730337,
+                        0.010112359550561834,
+                        87755.0
+                    ],
+                    "params": {
+                        "pooling": "mean",
+                        "model": "GAT",
+                        "qfe_layers": 1,
+                        "layers": 9,
+                        "hidden": 109,
+                        "dropout": 0.3362318125031628,
+                        "lr": 0.0021464288658229135,
+                        "weight_decay": 2.21285768925009e-05
+                    }
+                },
+                {
+                    "number": 183,
+                    "validation_results": [
+                        0.699438202247191,
+                        0.02078651685393257,
+                        3829.0
+                    ],
+                    "params": {
+                        "pooling": "max",
+                        "model": "GraphSAGE",
+                        "qfe_layers": 4,
+                        "layers": 2,
+                        "hidden": 103,
+                        "dropout": 0.1582101157668454,
+                        "lr": 0.006719169686561552,
+                        "weight_decay": 0.0006900060680846828
+                    }
+                },
+                {
+                    "number": 31,
+                    "validation_results": [
+                        0.7014813884878539,
+                        0.014606741573033766,
+                        6822.0
+                    ],
+                    "params": {
+                        "pooling": "max",
+                        "model": "GraphConv",
+                        "qfe_layers": 3,
+                        "layers": 2,
+                        "hidden": 184,
+                        "dropout": 0.25766887377618675,
+                        "lr": 0.0012994961275888794,
+                        "weight_decay": 1.1085866524338399e-05
+                    }
+                },
+                {
+                    "number": 157,
+                    "validation_results": [
+                        0.6934341849224782,
+                        0.01815328604607369,
+                        72674.0
+                    ],
+                    "params": {
+                        "pooling": "mean",
+                        "model": "GCN",
+                        "qfe_layers": 4,
+                        "layers": 5,
+                        "hidden": 152,
+                        "dropout": 0.15445796797525319,
+                        "lr": 0.00022022203287401217,
+                        "weight_decay": 0.0003222408922546637
+                    }
+                }
+            ],
+            "best_acc": [
+                {
+                    "number": 134,
+                    "validation_results": [
+                        0.7258426966292135,
+                        0.02022471910112361,
+                        81311.0
+                    ],
+                    "params": {
+                        "pooling": "max",
+                        "model": "GCN",
+                        "qfe_layers": 1,
+                        "layers": 5,
+                        "hidden": 161,
+                        "dropout": 0.40633012162881404,
+                        "lr": 0.004258907133481044,
+                        "weight_decay": 0.00011662452924932157
+                    }
+                },
+                {
+                    "number": 221,
+                    "validation_results": [
+                        0.7376404494382022,
+                        0.0252808988764045,
+                        239123.0
+                    ],
+                    "params": {
+                        "pooling": "mean",
+                        "model": "GAT",
+                        "qfe_layers": 3,
+                        "layers": 13,
+                        "hidden": 145,
+                        "dropout": 0.2184621720552729,
+                        "lr": 0.002020557781246677,
+                        "weight_decay": 1.8188845391264567e-05
+                    }
+                },
+                {
+                    "number": 183,
+                    "validation_results": [
+                        0.699438202247191,
+                        0.02078651685393257,
+                        3829.0
+                    ],
+                    "params": {
+                        "pooling": "max",
+                        "model": "GraphSAGE",
+                        "qfe_layers": 4,
+                        "layers": 2,
+                        "hidden": 103,
+                        "dropout": 0.1582101157668454,
+                        "lr": 0.006719169686561552,
+                        "weight_decay": 0.0006900060680846828
+                    }
+                },
+                {
+                    "number": 153,
+                    "validation_results": [
+                        0.710463875462934,
+                        0.01874960768313355,
+                        16079.0
+                    ],
+                    "params": {
+                        "pooling": "max",
+                        "model": "GAT",
+                        "qfe_layers": 2,
+                        "layers": 9,
+                        "hidden": 45,
+                        "dropout": 0.025097132081581486,
+                        "lr": 0.00042331883258835026,
+                        "weight_decay": 1.388074182779685e-05
+                    }
+                },
+                {
+                    "number": 179,
+                    "validation_results": [
+                        0.7119484024857197,
+                        0.041161885631787076,
+                        341002.0
+                    ],
+                    "params": {
+                        "pooling": "max",
+                        "model": "GAT",
+                        "qfe_layers": 1,
+                        "layers": 11,
+                        "hidden": 192,
+                        "dropout": 0.02472973842544013,
+                        "lr": 0.002080539284386136,
+                        "weight_decay": 8.06989842487008e-05
+                    }
+                }
+            ],
+            "low_params": [
+                {
+                    "number": 65,
+                    "validation_results": [
+                        0.696067415730337,
+                        0.04550561797752806,
+                        5001.0
+                    ],
+                    "params": {
+                        "pooling": "max",
+                        "model": "GraphSAGE",
+                        "qfe_layers": 1,
+                        "layers": 2,
+                        "hidden": 135,
+                        "dropout": 0.03475676405745326,
+                        "lr": 0.006888765314328789,
+                        "weight_decay": 1.4324198200317063e-05
+                    }
+                },
+                {
+                    "number": 224,
+                    "validation_results": [
+                        0.7258426966292135,
+                        0.03483146067415732,
+                        8146.0
+                    ],
+                    "params": {
+                        "pooling": "max",
+                        "model": "GCN",
+                        "qfe_layers": 3,
+                        "layers": 7,
+                        "hidden": 38,
+                        "dropout": 0.432636439737808,
+                        "lr": 0.008544666761900983,
+                        "weight_decay": 1.591209123166832e-05
+                    }
+                },
+                {
+                    "number": 183,
+                    "validation_results": [
+                        0.699438202247191,
+                        0.02078651685393257,
+                        3829.0
+                    ],
+                    "params": {
+                        "pooling": "max",
+                        "model": "GraphSAGE",
+                        "qfe_layers": 4,
+                        "layers": 2,
+                        "hidden": 103,
+                        "dropout": 0.1582101157668454,
+                        "lr": 0.006719169686561552,
+                        "weight_decay": 0.0006900060680846828
+                    }
+                },
+                {
+                    "number": 31,
+                    "validation_results": [
+                        0.7014813884878539,
+                        0.014606741573033766,
+                        6822.0
+                    ],
+                    "params": {
+                        "pooling": "max",
+                        "model": "GraphConv",
+                        "qfe_layers": 3,
+                        "layers": 2,
+                        "hidden": 184,
+                        "dropout": 0.25766887377618675,
+                        "lr": 0.0012994961275888794,
+                        "weight_decay": 1.1085866524338399e-05
+                    }
+                },
+                {
+                    "number": 195,
+                    "validation_results": [
+                        0.7109817337266964,
+                        0.062359550561797705,
+                        5298.0
+                    ],
+                    "params": {
+                        "pooling": "max",
+                        "model": "GraphSAGE",
+                        "qfe_layers": 1,
+                        "layers": 7,
+                        "hidden": 21,
+                        "dropout": 0.49879401258143835,
+                        "lr": 0.002080539284386136,
+                        "weight_decay": 4.521126055196891e-05
+                    }
+                }
+            ]
+        },
+        "MLP-2^D": {
+            "best_all": [
+                {
+                    "number": 184,
+                    "validation_results": [
+                        0.6685393258426966,
+                        0.008988764044943809,
+                        162.0
+                    ],
+                    "params": {
+                        "pooling": "max",
+                        "model": "GAT",
+                        "layers": 1,
+                        "hidden": 41,
+                        "dropout": 0.20052615421656422,
+                        "lr": 0.0032405017484304004,
+                        "weight_decay": 0.0003764049269228177
+                    }
+                },
+                {
+                    "number": 202,
+                    "validation_results": [
+                        0.7084269662921348,
+                        0.016292134831460692,
+                        2178.0
+                    ],
+                    "params": {
+                        "pooling": "max",
+                        "model": "GraphSAGE",
+                        "layers": 2,
+                        "hidden": 156,
+                        "dropout": 0.44237031076130906,
+                        "lr": 0.0011262863530258943,
+                        "weight_decay": 5.978664580942005e-05
+                    }
+                },
+                {
+                    "number": 0,
+                    "validation_results": [
+                        0.6713483146067416,
+                        0.011797752808988704,
+                        13020.0
+                    ],
+                    "params": {
+                        "pooling": "mean",
+                        "model": "GraphConv",
+                        "layers": 5,
+                        "hidden": 45,
+                        "dropout": 0.1673836655137108,
+                        "lr": 0.0006818291826241399,
+                        "weight_decay": 4.7772284437923053e-05
+                    }
+                },
+                {
+                    "number": 52,
+                    "validation_results": [
+                        0.7060699265582826,
+                        0.015058690603226399,
+                        28815.0
+                    ],
+                    "params": {
+                        "pooling": "max",
+                        "model": "GCN",
+                        "layers": 9,
+                        "hidden": 63,
+                        "dropout": 0.029993756064079835,
+                        "lr": 0.00047193730029387827,
+                        "weight_decay": 9.868289147479186e-05
+                    }
+                },
+                {
+                    "number": 135,
+                    "validation_results": [
+                        0.7246186680057749,
+                        0.019509133136651813,
+                        3036.0
+                    ],
+                    "params": {
+                        "pooling": "max",
+                        "model": "GraphSAGE",
+                        "layers": 2,
+                        "hidden": 222,
+                        "dropout": 0.26591429120021004,
+                        "lr": 0.0014548378830430654,
+                        "weight_decay": 0.00015668025593005406
+                    }
+                }
+            ],
+            "best_acc": [
+                {
+                    "number": 115,
+                    "validation_results": [
+                        0.7213483146067415,
+                        0.05842696629213484,
+                        342451.0
+                    ],
+                    "params": {
+                        "pooling": "max",
+                        "model": "GAT",
+                        "layers": 9,
+                        "hidden": 219,
+                        "dropout": 0.45746216732202555,
+                        "lr": 0.0020205496252044116,
+                        "weight_decay": 2.6393634005388218e-05
+                    }
+                },
+                {
+                    "number": 34,
+                    "validation_results": [
+                        0.7129213483146067,
+                        0.009550561797752821,
+                        396721.0
+                    ],
+                    "params": {
+                        "pooling": "max",
+                        "model": "GraphSAGE",
+                        "layers": 8,
+                        "hidden": 181,
+                        "dropout": 0.0917147035906381,
+                        "lr": 0.0005163239419150217,
+                        "weight_decay": 0.00031540945813393276
+                    }
+                },
+                {
+                    "number": 42,
+                    "validation_results": [
+                        0.7056179775280899,
+                        0.024719101123595544,
+                        259165.0
+                    ],
+                    "params": {
+                        "pooling": "mean",
+                        "model": "GAT",
+                        "layers": 12,
+                        "hidden": 159,
+                        "dropout": 0.4445695355854667,
+                        "lr": 0.0003860234270550052,
+                        "weight_decay": 1.1255577767052191e-05
+                    }
+                },
+                {
+                    "number": 202,
+                    "validation_results": [
+                        0.7082166844516979,
+                        0.019873203188751576,
+                        43912.0
+                    ],
+                    "params": {
+                        "pooling": "max",
+                        "model": "GAT",
+                        "layers": 6,
+                        "hidden": 102,
+                        "dropout": 0.37332482657976407,
+                        "lr": 0.002358819839368905,
+                        "weight_decay": 0.0009572390595240347
+                    }
+                },
+                {
+                    "number": 5,
+                    "validation_results": [
+                        0.7367804908668634,
+                        0.018802962776975685,
+                        346093.0
+                    ],
+                    "params": {
+                        "pooling": "max",
+                        "model": "GraphSAGE",
+                        "layers": 8,
+                        "hidden": 169,
+                        "dropout": 0.20372590643641703,
+                        "lr": 8.82583285292396e-05,
+                        "weight_decay": 0.00023224214618423447
+                    }
+                }
+            ],
+            "low_params": [
+                {
+                    "number": 52,
+                    "validation_results": [
+                        0.7196629213483146,
+                        0.04887640449438202,
+                        5940.0
+                    ],
+                    "params": {
+                        "pooling": "mean",
+                        "model": "GCN",
+                        "layers": 8,
+                        "hidden": 30,
+                        "dropout": 0.2364406837504281,
+                        "lr": 0.007103186991484188,
+                        "weight_decay": 0.00013097972678448379
+                    }
+                },
+                {
+                    "number": 202,
+                    "validation_results": [
+                        0.7084269662921348,
+                        0.016292134831460692,
+                        2178.0
+                    ],
+                    "params": {
+                        "pooling": "max",
+                        "model": "GraphSAGE",
+                        "layers": 2,
+                        "hidden": 156,
+                        "dropout": 0.44237031076130906,
+                        "lr": 0.0011262863530258943,
+                        "weight_decay": 5.978664580942005e-05
+                    }
+                },
+                {
+                    "number": 97,
+                    "validation_results": [
+                        0.6865168539325843,
+                        0.017977528089887673,
+                        683.0
+                    ],
+                    "params": {
+                        "pooling": "max",
+                        "model": "GraphConv",
+                        "layers": 2,
+                        "hidden": 41,
+                        "dropout": 0.33139054962378456,
+                        "lr": 0.0016832951480810201,
+                        "weight_decay": 1.5093294270402285e-05
+                    }
+                },
+                {
+                    "number": 195,
+                    "validation_results": [
+                        0.6988042181909484,
+                        0.01645533864791915,
+                        3231.0
+                    ],
+                    "params": {
+                        "pooling": "max",
+                        "model": "GraphSAGE",
+                        "layers": 2,
+                        "hidden": 237,
+                        "dropout": 0.26025043876762244,
+                        "lr": 0.0003496947060088795,
+                        "weight_decay": 0.0006593343072159042
+                    }
+                },
+                {
+                    "number": 135,
+                    "validation_results": [
+                        0.7246186680057749,
+                        0.019509133136651813,
+                        3036.0
+                    ],
+                    "params": {
+                        "pooling": "max",
+                        "model": "GraphSAGE",
+                        "layers": 2,
+                        "hidden": 222,
+                        "dropout": 0.26591429120021004,
+                        "lr": 0.0014548378830430654,
+                        "weight_decay": 0.00015668025593005406
+                    }
+                }
+            ]
+        },
+        "MLP-D": {
+            "best_all": [
+                {
+                    "number": 36,
+                    "validation_results": [
+                        0.7359550561797752,
+                        0.025842696629213513,
+                        96142.0
+                    ],
+                    "params": {
+                        "pooling": "max",
+                        "model": "GAT",
+                        "layers": 5,
+                        "hidden": 176,
+                        "dropout": 0.19502778092636558,
+                        "lr": 0.005036098886014104,
+                        "weight_decay": 9.966465119561264e-05
+                    }
+                },
+                {
+                    "number": 210,
+                    "validation_results": [
+                        0.7089887640449437,
+                        0.010112359550561834,
+                        2706.0
+                    ],
+                    "params": {
+                        "pooling": "max",
+                        "model": "GraphSAGE",
+                        "layers": 4,
+                        "hidden": 24,
+                        "dropout": 0.16187985101232805,
+                        "lr": 0.002400655607911104,
+                        "weight_decay": 0.0004194847524386784
+                    }
+                },
+                {
+                    "number": 72,
+                    "validation_results": [
+                        0.7179775280898877,
+                        0.008988764044943864,
+                        3833.0
+                    ],
+                    "params": {
+                        "pooling": "max",
+                        "model": "GCN",
+                        "layers": 14,
+                        "hidden": 17,
+                        "dropout": 0.008367649988030301,
+                        "lr": 0.00911309999964682,
+                        "weight_decay": 1.1951388753959008e-05
+                    }
+                },
+                {
+                    "number": 146,
+                    "validation_results": [
+                        0.7098581382210783,
+                        0.015476115749168295,
+                        10367.0
+                    ],
+                    "params": {
+                        "pooling": "max",
+                        "model": "GCN",
+                        "layers": 10,
+                        "hidden": 35,
+                        "dropout": 0.20019742171725846,
+                        "lr": 0.0009988869863729818,
+                        "weight_decay": 1.5848043934909497e-05
+                    }
+                },
+                {
+                    "number": 126,
+                    "validation_results": [
+                        0.7089887640449438,
+                        0.02921348314606742,
+                        32410.0
+                    ],
+                    "params": {
+                        "pooling": "mean",
+                        "model": "GraphSAGE",
+                        "layers": 7,
+                        "hidden": 56,
+                        "dropout": 0.20170968923069954,
+                        "lr": 0.002512051102384654,
+                        "weight_decay": 3.8061789176885116e-05
+                    }
+                }
+            ],
+            "best_acc": [
+                {
+                    "number": 36,
+                    "validation_results": [
+                        0.7359550561797752,
+                        0.025842696629213513,
+                        96142.0
+                    ],
+                    "params": {
+                        "pooling": "max",
+                        "model": "GAT",
+                        "layers": 5,
+                        "hidden": 176,
+                        "dropout": 0.19502778092636558,
+                        "lr": 0.005036098886014104,
+                        "weight_decay": 9.966465119561264e-05
+                    }
+                },
+                {
+                    "number": 63,
+                    "validation_results": [
+                        0.7224719101123596,
+                        0.01685393258426965,
+                        115353.0
+                    ],
+                    "params": {
+                        "pooling": "max",
+                        "model": "GraphSAGE",
+                        "layers": 6,
+                        "hidden": 119,
+                        "dropout": 0.28093660274339155,
+                        "lr": 0.00042281438032276794,
+                        "weight_decay": 7.451203399199963e-05
+                    }
+                },
+                {
+                    "number": 141,
+                    "validation_results": [
+                        0.7325842696629213,
+                        0.011235955056179803,
+                        101636.0
+                    ],
+                    "params": {
+                        "pooling": "max",
+                        "model": "GCN",
+                        "layers": 6,
+                        "hidden": 158,
+                        "dropout": 0.28868569714599046,
+                        "lr": 0.001817401824361642,
+                        "weight_decay": 1.1951388753959008e-05
+                    }
+                },
+                {
+                    "number": 78,
+                    "validation_results": [
+                        0.7276787395643713,
+                        0.022883058188437666,
+                        45946.0
+                    ],
+                    "params": {
+                        "pooling": "max",
+                        "model": "GAT",
+                        "layers": 14,
+                        "hidden": 60,
+                        "dropout": 0.06125486496543081,
+                        "lr": 0.002426709230643565,
+                        "weight_decay": 2.828333651987828e-05
+                    }
+                },
+                {
+                    "number": 103,
+                    "validation_results": [
+                        0.7155545791224657,
+                        0.03577929822358916,
+                        177898.0
+                    ],
+                    "params": {
+                        "pooling": "max",
+                        "model": "GraphSAGE",
+                        "layers": 9,
+                        "hidden": 112,
+                        "dropout": 0.3772651041557547,
+                        "lr": 0.0016643256329281514,
+                        "weight_decay": 1.3563014503231348e-05
+                    }
+                }
+            ],
+            "low_params": [
+                {
+                    "number": 6,
+                    "validation_results": [
+                        0.7123595505617977,
+                        0.03370786516853935,
+                        14594.0
+                    ],
+                    "params": {
+                        "pooling": "mean",
+                        "model": "GCN",
+                        "layers": 5,
+                        "hidden": 68,
+                        "dropout": 0.14547991112583136,
+                        "lr": 0.005945980968613873,
+                        "weight_decay": 0.00023492548247140604
+                    }
+                },
+                {
+                    "number": 210,
+                    "validation_results": [
+                        0.7089887640449437,
+                        0.010112359550561834,
+                        2706.0
+                    ],
+                    "params": {
+                        "pooling": "max",
+                        "model": "GraphSAGE",
+                        "layers": 4,
+                        "hidden": 24,
+                        "dropout": 0.16187985101232805,
+                        "lr": 0.002400655607911104,
+                        "weight_decay": 0.0004194847524386784
+                    }
+                },
+                {
+                    "number": 72,
+                    "validation_results": [
+                        0.7179775280898877,
+                        0.008988764044943864,
+                        3833.0
+                    ],
+                    "params": {
+                        "pooling": "max",
+                        "model": "GCN",
+                        "layers": 14,
+                        "hidden": 17,
+                        "dropout": 0.008367649988030301,
+                        "lr": 0.00911309999964682,
+                        "weight_decay": 1.1951388753959008e-05
+                    }
+                },
+                {
+                    "number": 146,
+                    "validation_results": [
+                        0.7098581382210783,
+                        0.015476115749168295,
+                        10367.0
+                    ],
+                    "params": {
+                        "pooling": "max",
+                        "model": "GCN",
+                        "layers": 10,
+                        "hidden": 35,
+                        "dropout": 0.20019742171725846,
+                        "lr": 0.0009988869863729818,
+                        "weight_decay": 1.5848043934909497e-05
+                    }
+                },
+                {
+                    "number": 79,
+                    "validation_results": [
+                        0.6958634109597639,
+                        0.04044943820224717,
+                        13202.0
+                    ],
+                    "params": {
+                        "pooling": "mean",
+                        "model": "GCN",
+                        "layers": 6,
+                        "hidden": 56,
+                        "dropout": 0.11963386222824834,
+                        "lr": 0.0030382814263226012,
+                        "weight_decay": 1.5690399730990025e-05
+                    }
+                }
+            ]
+        },
+        "none": {
+            "best_all": [
+                {
+                    "number": 81,
+                    "validation_results": [
+                        0.7264044943820225,
+                        0.01853932584269663,
+                        9752.0
+                    ],
+                    "params": {
+                        "pooling": "max",
+                        "model": "GraphSAGE",
+                        "layers": 5,
+                        "hidden": 39,
+                        "dropout": 0.29958896224877557,
+                        "lr": 0.0009289038749071056,
+                        "weight_decay": 1.4183462667005481e-05
+                    }
+                },
+                {
+                    "number": 70,
+                    "validation_results": [
+                        0.7050561797752808,
+                        0.005056179775280889,
+                        13232.0
+                    ],
+                    "params": {
+                        "pooling": "mean",
+                        "model": "GCN",
+                        "layers": 16,
+                        "hidden": 30,
+                        "dropout": 0.22749062421105692,
+                        "lr": 0.004823808800483061,
+                        "weight_decay": 0.00013025597670477906
+                    }
+                },
+                {
+                    "number": 156,
+                    "validation_results": [
+                        0.7297752808988764,
+                        0.014044943820224753,
+                        11842.0
+                    ],
+                    "params": {
+                        "pooling": "max",
+                        "model": "GCN",
+                        "layers": 13,
+                        "hidden": 32,
+                        "dropout": 0.40530373071302334,
+                        "lr": 0.0003330251943979764,
+                        "weight_decay": 0.00015742142660981893
+                    }
+                },
+                {
+                    "number": 19,
+                    "validation_results": [
+                        0.725208712572971,
+                        0.009622748101186351,
+                        64255.0
+                    ],
+                    "params": {
+                        "pooling": "max",
+                        "model": "GCN",
+                        "layers": 16,
+                        "hidden": 67,
+                        "dropout": 0.4177113603175742,
+                        "lr": 0.00014395301260797098,
+                        "weight_decay": 8.271182927054824e-05
+                    }
+                },
+                {
+                    "number": 122,
+                    "validation_results": [
+                        0.6949438202247191,
+                        0.01067415730337079,
+                        1679.0
+                    ],
+                    "params": {
+                        "pooling": "max",
+                        "model": "GraphSAGE",
+                        "layers": 2,
+                        "hidden": 129,
+                        "dropout": 0.131368901811322,
+                        "lr": 0.00017668535167121447,
+                        "weight_decay": 2.0197778619881213e-05
+                    }
+                }
+            ],
+            "best_acc": [
+                {
+                    "number": 80,
+                    "validation_results": [
+                        0.753370786516854,
+                        0.0365168539325843,
+                        163451.0
+                    ],
+                    "params": {
+                        "pooling": "max",
+                        "model": "GCN",
+                        "layers": 12,
+                        "hidden": 127,
+                        "dropout": 0.44244338522460536,
+                        "lr": 0.00039505384075281814,
+                        "weight_decay": 0.00027590036019032227
+                    }
+                },
+                {
+                    "number": 112,
+                    "validation_results": [
+                        0.7443820224719101,
+                        0.039887640449438266,
+                        686495.0
+                    ],
+                    "params": {
+                        "pooling": "max",
+                        "model": "GCN",
+                        "layers": 13,
+                        "hidden": 249,
+                        "dropout": 0.14725086002782733,
+                        "lr": 7.808678820692648e-05,
+                        "weight_decay": 6.913106813581558e-05
+                    }
+                },
+                {
+                    "number": 25,
+                    "validation_results": [
+                        0.7325842696629212,
+                        0.023595505617977575,
+                        5722.0
+                    ],
+                    "params": {
+                        "pooling": "max",
+                        "model": "GCN",
+                        "layers": 13,
+                        "hidden": 22,
+                        "dropout": 0.40530373071302334,
+                        "lr": 0.0010083646588330503,
+                        "weight_decay": 0.0003339087692530627
+                    }
+                },
+                {
+                    "number": 41,
+                    "validation_results": [
+                        0.7369876341723683,
+                        0.013888017073629966,
+                        434254.0
+                    ],
+                    "params": {
+                        "pooling": "mean",
+                        "model": "GCN",
+                        "layers": 15,
+                        "hidden": 182,
+                        "dropout": 0.09942461497443117,
+                        "lr": 0.000272850187266836,
+                        "weight_decay": 7.618406235948402e-05
+                    }
+                },
+                {
+                    "number": 182,
+                    "validation_results": [
+                        0.7429979285669448,
+                        0.04606741573033707,
+                        174127.0
+                    ],
+                    "params": {
+                        "pooling": "max",
+                        "model": "GCN",
+                        "layers": 13,
+                        "hidden": 125,
+                        "dropout": 0.2509732582508559,
+                        "lr": 0.00023324202179904693,
+                        "weight_decay": 7.537409796948517e-05
+                    }
+                }
+            ],
+            "low_params": [
+                {
+                    "number": 63,
+                    "validation_results": [
+                        0.749438202247191,
+                        0.03932584269662914,
+                        4955.0
+                    ],
+                    "params": {
+                        "pooling": "max",
+                        "model": "GCN",
+                        "layers": 5,
+                        "hidden": 39,
+                        "dropout": 0.464043753159422,
+                        "lr": 0.0031453312987164425,
+                        "weight_decay": 5.900298085103227e-05
+                    }
+                },
+                {
+                    "number": 71,
+                    "validation_results": [
+                        0.7308988764044944,
+                        0.02640449438202247,
+                        14321.0
+                    ],
+                    "params": {
+                        "pooling": "max",
+                        "model": "GCN",
+                        "layers": 12,
+                        "hidden": 37,
+                        "dropout": 0.1285261277042118,
+                        "lr": 0.0006417733494658097,
+                        "weight_decay": 6.326188037862832e-05
+                    }
+                },
+                {
+                    "number": 25,
+                    "validation_results": [
+                        0.7325842696629212,
+                        0.023595505617977575,
+                        5722.0
+                    ],
+                    "params": {
+                        "pooling": "max",
+                        "model": "GCN",
+                        "layers": 13,
+                        "hidden": 22,
+                        "dropout": 0.40530373071302334,
+                        "lr": 0.0010083646588330503,
+                        "weight_decay": 0.0003339087692530627
+                    }
+                },
+                {
+                    "number": 189,
+                    "validation_results": [
+                        0.7207865168539325,
+                        0.011797752808988704,
+                        15458.0
+                    ],
+                    "params": {
+                        "pooling": "mean",
+                        "model": "GCN",
+                        "layers": 9,
+                        "hidden": 46,
+                        "dropout": 0.060457032300428926,
+                        "lr": 0.002832248698789663,
+                        "weight_decay": 0.000544697909720946
+                    }
+                },
+                {
+                    "number": 118,
+                    "validation_results": [
+                        0.7318121900696755,
+                        0.033356349256167206,
+                        14575.0
+                    ],
+                    "params": {
+                        "pooling": "max",
+                        "model": "GCN",
+                        "layers": 6,
+                        "hidden": 59,
+                        "dropout": 0.2206078770251621,
+                        "lr": 0.001734613470581729,
+                        "weight_decay": 1.5905348635357757e-05
+                    }
+                }
+            ]
+        }
+    },
+    "accuracies": {
+        "QFE-exp": {
+            "best_all": [
+                0.6591928251121076,
+                0.7085201793721974,
+                0.6591928251121076,
+                0.7522522522522522,
+                0.6801801801801802
+            ],
+            "best_acc": [
+                0.6143497757847534,
+                0.6995515695067265,
+                0.6816143497757847,
+                0.7432432432432432,
+                0.6756756756756757
+            ],
+            "low_params": [
+                0.5829596412556054,
+                0.6995515695067265,
+                0.6591928251121076,
+                0.6531531531531531,
+                0.6756756756756757
+            ]
+        },
+        "QFE-probs": {
+            "best_all": [
+                0.6367713004484304,
+                0.7130044843049327,
+                0.7399103139013453,
+                0.6711711711711712,
+                0.7117117117117117
+            ],
+            "best_acc": [
+                0.6591928251121076,
+                0.7085201793721974,
+                0.7354260089686099,
+                0.6531531531531531,
+                0.7162162162162162
+            ],
+            "low_params": [
+                0.6502242152466368,
+                0.6905829596412556,
+                0.7085201793721974,
+                0.6711711711711712,
+                0.6081081081081081
+            ]
+        },
+        "MLP-2^D": {
+            "best_all": [
+                0.6278026905829597,
+                0.7085201793721974,
+                0.6278026905829597,
+                0.7117117117117117,
+                0.6396396396396397
+            ],
+            "best_acc": [
+                0.6816143497757847,
+                0.726457399103139,
+                0.6591928251121076,
+                0.7162162162162162,
+                0.6441441441441441
+            ],
+            "low_params": [
+                0.6860986547085202,
+                0.7040358744394619,
+                0.7085201793721974,
+                0.7702702702702703,
+                0.6396396396396397
+            ]
+        },
+        "MLP-D": {
+            "best_all": [
+                0.6995515695067265,
+                0.7040358744394619,
+                0.5964125560538116,
+                0.7522522522522522,
+                0.6621621621621622
+            ],
+            "best_acc": [
+                0.6860986547085202,
+                0.7533632286995515,
+                0.7354260089686099,
+                0.7297297297297297,
+                0.6891891891891891
+            ],
+            "low_params": [
+                0.6905829596412556,
+                0.7130044843049327,
+                0.5964125560538116,
+                0.7477477477477478,
+                0.6621621621621622
+            ]
+        },
+        "none": {
+            "best_all": [
+                0.6771300448430493,
+                0.7533632286995515,
+                0.7130044843049327,
+                0.7342342342342343,
+                0.6486486486486487
+            ],
+            "best_acc": [
+                0.695067264573991,
+                0.7488789237668162,
+                0.5964125560538116,
+                0.7162162162162162,
+                0.7027027027027027
+            ],
+            "low_params": [
+                0.6771300448430493,
+                0.757847533632287,
+                0.5964125560538116,
+                0.6531531531531531,
+                0.6756756756756757
+            ]
+        }
+    },
+    "exps": {
+        "QFE-exp": {
+            "best_all": [
+                "acd91afa69054fbf8ab2a820afc6da42",
+                "c58c2671413643559c43b29c4f3f78dc",
+                "5118fb050ec54f92865dbb17db3b5574",
+                "5b7e4a9949f646a786c38513e2d2a351",
+                "5a89fe5bf6fa4390869a44a4891b00ee"
+            ],
+            "best_acc": [
+                "3590a60ebd5d49aba51c49c12d1f434d",
+                "496bf860786047b5862ef161548afa3e",
+                "2e336227dc254022a9c510267d138626",
+                "a3909e98e7c645f185c075dcaaa7bf5d",
+                "f6c203afd5a14acaab31d93200b77389"
+            ],
+            "low_params": [
+                "bca0f19ffac146b1804b7bfa17df1a2e",
+                "c18c3fb11eb1487f9138d5cd41dfe2b7",
+                "7607ab4a8dbb4ddda505b10fe2638b08",
+                "7a63c339363b4e6186ce2a829437235b",
+                "04727063f04f4fc880157e9b67e50eb5"
+            ]
+        },
+        "QFE-probs": {
+            "best_all": [
+                "874b50e7ff924b65838864c4e49ba9e2",
+                "5d44a38c739240519e6934d563559a68",
+                "6df7a119ade0451bb184035fe89b3551",
+                "c488557dfde64dd6bbdb3ab043f25683",
+                "c9729816cc3b42999c6cec0fc71e2146"
+            ],
+            "best_acc": [
+                "0bb001e815844a89a349bd921e382bde",
+                "318752ed72a14b01a77b97c4ce383c2a",
+                "8d057f25d7e940e184cabedcdd34b969",
+                "fe7ec7a0b3e047db8445f90c92b1a63b",
+                "a2c46a6dde654a54ae4e03387aa407d2"
+            ],
+            "low_params": [
+                "d385c6a31cb64cce820db2ee037f6a9a",
+                "915f8506a42d4b248390dd12eb220987",
+                "dce09843a6b34c258977beba99b4d6b2",
+                "bc894f3934774e14b886f8383ff375e6",
+                "7c504645a38c4ec3bacb2237c13cfa21"
+            ]
+        },
+        "MLP-2^D": {
+            "best_all": [
+                "b9ba489a5a634421b9975eb4f6c430d4",
+                "9f936a5741af4fa19842ec9c5c56e1a4",
+                "0cc77b2660514c9a9ad278552e03970f",
+                "cd89b61cde254e12960dbe0652ebb6e7",
+                "f1075819c3c44a22bd2d93f92d5e947f"
+            ],
+            "best_acc": [
+                "ece6bd7816d74cfcb48ba257dcbeb29d",
+                "81ea139611fb4718b5711e62b0751998",
+                "ab080ea12c0140f4befe838cc5b6ff8b",
+                "0bab3bd8f42541e48a476a604d9cc892",
+                "d70a2b533dae4b98bf8ec391e0fe1179"
+            ],
+            "low_params": [
+                "76c0ec0b60fc466c921196305c825bb1",
+                "8fcff18402634fdea466193b6361d7da",
+                "154739aa92794f7e89303f3b25b18bd1",
+                "75eccfc8f40947f8992c3bc7986c177d",
+                "fa242a1ca51641f29195ccc9845abf9d"
+            ]
+        },
+        "MLP-D": {
+            "best_all": [
+                "4741e5454f1546aabe75ff3e8cdc7c8a",
+                "e086f6c197e348db8ad208355bb342f0",
+                "e2c2f21d680b42d4a760f9642daa1849",
+                "65081b2a0cd440839739867da9e87b24",
+                "fa27aa198acc44c9bc4c00ca48300679"
+            ],
+            "best_acc": [
+                "4387295b11564a4cacd0bf2ce7e1baac",
+                "bfbdbf3942264e449ce290b41c9de4da",
+                "0290bc1bf502439f9aaa4e959c58076c",
+                "800e139d68c44759b6973b5aacb2a655",
+                "94bcfaf8e4ad40ab93b75110819805e4"
+            ],
+            "low_params": [
+                "95ea83297e8840698d658434fb155e95",
+                "529c60e801c048ac83c2a91dbc7f5bfa",
+                "262ef74913274b8c8366228ee5d23b31",
+                "6b9de3b44f3f4ee0a445caa55a0bbdcb",
+                "799020caebc746e99f83f0f7220205c6"
+            ]
+        },
+        "none": {
+            "best_all": [
+                "9233546200d349d8987c1df5fe1a90bb",
+                "1d2a9009a7fb4f7cb9a0ed768c7773a0",
+                "60113df180a94f0d8be7f5ba02e04783",
+                "7592454f8a61442fa71a69e32db1e84a",
+                "1392c2faf0a84941a7794aace589f75e"
+            ],
+            "best_acc": [
+                "4534dedc99664edd95fe1d62d7027b06",
+                "a20171a234f54a3680207733f7d27cab",
+                "e7282842fb684fb5a92003f73cdb662a",
+                "edb6429d2cfb45c79d6710569b0aef62",
+                "11da490a97dd444db419b7b7242cd303"
+            ],
+            "low_params": [
+                "23de9f69509f46faa84c6bb6c7314a12",
+                "a7bd777feb8f4d0a8fb19a8011ce2cf7",
+                "4c6520a6c88941d298a1e777adda6b39",
+                "1e810d58ac464893aa1440b11ec5e605",
+                "f64624af10a6482395c81ecd30f1f4e4"
+            ]
+        }
+    },
+    "results": {
+        "QFE-exp": {
+            "best_all": {
+                "accuracy": 0.6983395952005818,
+                "error": 0.0307518280612451
+            },
+            "best_acc": {
+                "accuracy": 0.6805296327717851,
+                "error": 0.036874318264452755
+            },
+            "low_params": {
+                "accuracy": 0.6460146244899608,
+                "error": 0.034977578475336335
+            }
+        },
+        "QFE-probs": {
+            "best_all": {
+                "accuracy": 0.6890962711590516,
+                "error": 0.031685048276976546
+            },
+            "best_acc": {
+                "accuracy": 0.6937320728800549,
+                "error": 0.027089645699511167
+            },
+            "low_params": {
+                "accuracy": 0.6597159940209267,
+                "error": 0.030572051872500228
+            }
+        },
+        "MLP-2^D": {
+            "best_all": {
+                "accuracy": 0.6645982305175131,
+                "error": 0.032060760311881376
+            },
+            "best_acc": {
+                "accuracy": 0.6855249868702783,
+                "error": 0.027867329212620695
+            },
+            "low_params": {
+                "accuracy": 0.7036904617622106,
+                "error": 0.03739546721609499
+            }
+        },
+        "MLP-D": {
+            "best_all": {
+                "accuracy": 0.6767563527653215,
+                "error": 0.04566921181270961
+            },
+            "best_acc": {
+                "accuracy": 0.7182947521512544,
+                "error": 0.022233668646224725
+            },
+            "low_params": {
+                "accuracy": 0.6741748474932331,
+                "error": 0.04577828950026264
+            }
+        },
+        "none": {
+            "best_all": {
+                "accuracy": 0.7022179129802448,
+                "error": 0.03500181796145918
+            },
+            "best_acc": {
+                "accuracy": 0.6819900618106896,
+                "error": 0.044588534723063955
+            },
+            "low_params": {
+                "accuracy": 0.6745869187573224,
+                "error": 0.04617824102129037
+            }
+        }
+    }
+}

@@ -1,0 +1,1655 @@
+{
+    "best_trials": {
+        "QFE-exp": {
+            "best_all": [
+                {
+                    "number": 100,
+                    "validation_results": [
+                        0.325,
+                        0.027083333333333348,
+                        1471.0
+                    ],
+                    "params": {
+                        "pooling": "sum",
+                        "model": "GraphSAGE",
+                        "qfe_layers": 4,
+                        "layers": 2,
+                        "hidden": 69,
+                        "dropout": 0.3610656611486737,
+                        "lr": 0.004205443068979364,
+                        "weight_decay": 0.00026131519726136954
+                    }
+                },
+                {
+                    "number": 20,
+                    "validation_results": [
+                        0.3260416666666667,
+                        0.030208333333333337,
+                        45412.0
+                    ],
+                    "params": {
+                        "pooling": "sum",
+                        "model": "GraphSAGE",
+                        "qfe_layers": 4,
+                        "layers": 5,
+                        "hidden": 85,
+                        "dropout": 0.3726993975396022,
+                        "lr": 0.0004877707059096757,
+                        "weight_decay": 4.252273532365299e-05
+                    }
+                },
+                {
+                    "number": 195,
+                    "validation_results": [
+                        0.28541666666666665,
+                        0.022916666666666696,
+                        6699.0
+                    ],
+                    "params": {
+                        "pooling": "sum",
+                        "model": "GCN",
+                        "qfe_layers": 2,
+                        "layers": 7,
+                        "hidden": 35,
+                        "dropout": 0.19763425698054982,
+                        "lr": 0.000562156202154704,
+                        "weight_decay": 0.0007959807757846094
+                    }
+                },
+                {
+                    "number": 74,
+                    "validation_results": [
+                        0.24583333333333335,
+                        0.012500000000000025,
+                        3830.0
+                    ],
+                    "params": {
+                        "pooling": "mean",
+                        "model": "GCN",
+                        "qfe_layers": 4,
+                        "layers": 3,
+                        "hidden": 56,
+                        "dropout": 0.23446108560877582,
+                        "lr": 0.0005855365851416431,
+                        "weight_decay": 8.298069034608245e-05
+                    }
+                },
+                {
+                    "number": 104,
+                    "validation_results": [
+                        0.3,
+                        0.02291666666666664,
+                        34538.0
+                    ],
+                    "params": {
+                        "pooling": "sum",
+                        "model": "GraphConv",
+                        "qfe_layers": 2,
+                        "layers": 3,
+                        "hidden": 126,
+                        "dropout": 0.3616162955245934,
+                        "lr": 0.00019596212216947977,
+                        "weight_decay": 1.0565766815242732e-05
+                    }
+                }
+            ],
+            "best_acc": [
+                {
+                    "number": 190,
+                    "validation_results": [
+                        0.36979166666666674,
+                        0.06354166666666669,
+                        211415.0
+                    ],
+                    "params": {
+                        "pooling": "mean",
+                        "model": "GraphConv",
+                        "qfe_layers": 4,
+                        "layers": 6,
+                        "hidden": 161,
+                        "dropout": 0.0886723562242257,
+                        "lr": 0.001452336072399035,
+                        "weight_decay": 1.133002120669627e-05
+                    }
+                },
+                {
+                    "number": 119,
+                    "validation_results": [
+                        0.34479166666666666,
+                        0.036458333333333315,
+                        127894.0
+                    ],
+                    "params": {
+                        "pooling": "mean",
+                        "model": "GraphConv",
+                        "qfe_layers": 4,
+                        "layers": 5,
+                        "hidden": 144,
+                        "dropout": 0.3399562961928818,
+                        "lr": 0.0004877707059096757,
+                        "weight_decay": 4.252273532365299e-05
+                    }
+                },
+                {
+                    "number": 153,
+                    "validation_results": [
+                        0.325,
+                        0.0625,
+                        21802.0
+                    ],
+                    "params": {
+                        "pooling": "sum",
+                        "model": "GraphSAGE",
+                        "qfe_layers": 4,
+                        "layers": 3,
+                        "hidden": 99,
+                        "dropout": 0.24803216837604813,
+                        "lr": 0.004584599467811971,
+                        "weight_decay": 0.00043780048946382154
+                    }
+                },
+                {
+                    "number": 202,
+                    "validation_results": [
+                        0.33854166666666674,
+                        0.0447916666666667,
+                        191115.0
+                    ],
+                    "params": {
+                        "pooling": "sum",
+                        "model": "GraphSAGE",
+                        "qfe_layers": 3,
+                        "layers": 6,
+                        "hidden": 153,
+                        "dropout": 0.04518850560051357,
+                        "lr": 0.00016317289209654865,
+                        "weight_decay": 1.433940108924235e-05
+                    }
+                },
+                {
+                    "number": 2,
+                    "validation_results": [
+                        0.3125,
+                        0.060416666666666646,
+                        66416.0
+                    ],
+                    "params": {
+                        "pooling": "sum",
+                        "model": "GraphConv",
+                        "qfe_layers": 2,
+                        "layers": 4,
+                        "hidden": 126,
+                        "dropout": 0.3616162955245934,
+                        "lr": 0.00019596212216947977,
+                        "weight_decay": 1.0565766815242732e-05
+                    }
+                }
+            ],
+            "low_params": [
+                {
+                    "number": 62,
+                    "validation_results": [
+                        0.334375,
+                        0.0802083333333333,
+                        3316.0
+                    ],
+                    "params": {
+                        "pooling": "mean",
+                        "model": "GraphConv",
+                        "qfe_layers": 2,
+                        "layers": 4,
+                        "hidden": 26,
+                        "dropout": 0.2164697387498678,
+                        "lr": 0.00812569219874909,
+                        "weight_decay": 4.6970735540056935e-05
+                    }
+                },
+                {
+                    "number": 20,
+                    "validation_results": [
+                        0.3260416666666667,
+                        0.030208333333333337,
+                        45412.0
+                    ],
+                    "params": {
+                        "pooling": "sum",
+                        "model": "GraphSAGE",
+                        "qfe_layers": 4,
+                        "layers": 5,
+                        "hidden": 85,
+                        "dropout": 0.3726993975396022,
+                        "lr": 0.0004877707059096757,
+                        "weight_decay": 4.252273532365299e-05
+                    }
+                },
+                {
+                    "number": 153,
+                    "validation_results": [
+                        0.325,
+                        0.0625,
+                        21802.0
+                    ],
+                    "params": {
+                        "pooling": "sum",
+                        "model": "GraphSAGE",
+                        "qfe_layers": 4,
+                        "layers": 3,
+                        "hidden": 99,
+                        "dropout": 0.24803216837604813,
+                        "lr": 0.004584599467811971,
+                        "weight_decay": 0.00043780048946382154
+                    }
+                },
+                {
+                    "number": 11,
+                    "validation_results": [
+                        0.2958333333333333,
+                        0.03541666666666668,
+                        8481.0
+                    ],
+                    "params": {
+                        "pooling": "sum",
+                        "model": "GraphConv",
+                        "qfe_layers": 3,
+                        "layers": 6,
+                        "hidden": 31,
+                        "dropout": 0.15585360314295882,
+                        "lr": 0.004247664955753576,
+                        "weight_decay": 0.00012072814159216628
+                    }
+                },
+                {
+                    "number": 109,
+                    "validation_results": [
+                        0.278125,
+                        0.030208333333333323,
+                        1327.0
+                    ],
+                    "params": {
+                        "pooling": "sum",
+                        "model": "GCN",
+                        "qfe_layers": 3,
+                        "layers": 2,
+                        "hidden": 119,
+                        "dropout": 0.12972652123533307,
+                        "lr": 0.0015320310535210848,
+                        "weight_decay": 0.00010918830821652384
+                    }
+                }
+            ]
+        },
+        "QFE-probs": {
+            "best_all": [
+                {
+                    "number": 4,
+                    "validation_results": [
+                        0.27083333333333337,
+                        0.012500000000000011,
+                        38282.0
+                    ],
+                    "params": {
+                        "pooling": "sum",
+                        "model": "GCN",
+                        "qfe_layers": 1,
+                        "layers": 3,
+                        "hidden": 184,
+                        "dropout": 0.01041883938863647,
+                        "lr": 4.021920059616563e-05,
+                        "weight_decay": 0.0001884232001901904
+                    }
+                },
+                {
+                    "number": 86,
+                    "validation_results": [
+                        0.303125,
+                        0.015625000000000028,
+                        11452.0
+                    ],
+                    "params": {
+                        "pooling": "sum",
+                        "model": "GraphConv",
+                        "qfe_layers": 4,
+                        "layers": 2,
+                        "hidden": 254,
+                        "dropout": 0.30145061637983134,
+                        "lr": 0.0028343394312595315,
+                        "weight_decay": 0.00010181255990275642
+                    }
+                },
+                {
+                    "number": 173,
+                    "validation_results": [
+                        0.33125,
+                        0.024999999999999967,
+                        4342.0
+                    ],
+                    "params": {
+                        "pooling": "max",
+                        "model": "GraphConv",
+                        "qfe_layers": 4,
+                        "layers": 2,
+                        "hidden": 96,
+                        "dropout": 0.1531666893874098,
+                        "lr": 0.0016180373129803943,
+                        "weight_decay": 0.00033492711277524146
+                    }
+                },
+                {
+                    "number": 140,
+                    "validation_results": [
+                        0.38541666666666663,
+                        0.03125,
+                        71920.0
+                    ],
+                    "params": {
+                        "pooling": "sum",
+                        "model": "GAT",
+                        "qfe_layers": 3,
+                        "layers": 4,
+                        "hidden": 182,
+                        "dropout": 0.4209636323752592,
+                        "lr": 0.00026141362930627083,
+                        "weight_decay": 9.237525661397632e-05
+                    }
+                },
+                {
+                    "number": 167,
+                    "validation_results": [
+                        0.32916666666666666,
+                        0.016666666666666663,
+                        77894.0
+                    ],
+                    "params": {
+                        "pooling": "sum",
+                        "model": "GraphConv",
+                        "qfe_layers": 2,
+                        "layers": 5,
+                        "hidden": 110,
+                        "dropout": 0.34306642748707666,
+                        "lr": 0.000756905692622033,
+                        "weight_decay": 1.182633317960491e-05
+                    }
+                }
+            ],
+            "best_acc": [
+                {
+                    "number": 41,
+                    "validation_results": [
+                        0.37812500000000004,
+                        0.05312499999999998,
+                        214948.0
+                    ],
+                    "params": {
+                        "pooling": "mean",
+                        "model": "GraphConv",
+                        "qfe_layers": 4,
+                        "layers": 4,
+                        "hidden": 226,
+                        "dropout": 0.169225686682915,
+                        "lr": 0.0003042113874731833,
+                        "weight_decay": 3.0336871268096558e-05
+                    }
+                },
+                {
+                    "number": 41,
+                    "validation_results": [
+                        0.3697916666666667,
+                        0.02812500000000001,
+                        184561.0
+                    ],
+                    "params": {
+                        "pooling": "sum",
+                        "model": "GraphConv",
+                        "qfe_layers": 2,
+                        "layers": 4,
+                        "hidden": 209,
+                        "dropout": 0.013343008969935233,
+                        "lr": 0.000274810486101393,
+                        "weight_decay": 3.116271658427413e-05
+                    }
+                },
+                {
+                    "number": 146,
+                    "validation_results": [
+                        0.37916666666666665,
+                        0.060416666666666674,
+                        130310.0
+                    ],
+                    "params": {
+                        "pooling": "mean",
+                        "model": "GraphSAGE",
+                        "qfe_layers": 2,
+                        "layers": 3,
+                        "hidden": 244,
+                        "dropout": 0.4310735145858966,
+                        "lr": 0.001537915201697529,
+                        "weight_decay": 0.00023807344211756426
+                    }
+                },
+                {
+                    "number": 140,
+                    "validation_results": [
+                        0.38541666666666663,
+                        0.03125,
+                        71920.0
+                    ],
+                    "params": {
+                        "pooling": "sum",
+                        "model": "GAT",
+                        "qfe_layers": 3,
+                        "layers": 4,
+                        "hidden": 182,
+                        "dropout": 0.4209636323752592,
+                        "lr": 0.00026141362930627083,
+                        "weight_decay": 9.237525661397632e-05
+                    }
+                },
+                {
+                    "number": 16,
+                    "validation_results": [
+                        0.34375,
+                        0.029166666666666674,
+                        555305.0
+                    ],
+                    "params": {
+                        "pooling": "sum",
+                        "model": "GraphConv",
+                        "qfe_layers": 2,
+                        "layers": 8,
+                        "hidden": 213,
+                        "dropout": 0.48187458271360906,
+                        "lr": 0.0003459157087998972,
+                        "weight_decay": 7.632766727154061e-05
+                    }
+                }
+            ],
+            "low_params": [
+                {
+                    "number": 188,
+                    "validation_results": [
+                        0.36354166666666665,
+                        0.053125000000000006,
+                        60386.0
+                    ],
+                    "params": {
+                        "pooling": "sum",
+                        "model": "GCN",
+                        "qfe_layers": 2,
+                        "layers": 3,
+                        "hidden": 234,
+                        "dropout": 0.3267499592530746,
+                        "lr": 0.0011932101335620678,
+                        "weight_decay": 0.00019210578876362427
+                    }
+                },
+                {
+                    "number": 106,
+                    "validation_results": [
+                        0.334375,
+                        0.04687499999999997,
+                        10994.0
+                    ],
+                    "params": {
+                        "pooling": "sum",
+                        "model": "GraphConv",
+                        "qfe_layers": 2,
+                        "layers": 2,
+                        "hidden": 244,
+                        "dropout": 0.03221206316562086,
+                        "lr": 0.0014552383785130163,
+                        "weight_decay": 9.058970626052138e-05
+                    }
+                },
+                {
+                    "number": 204,
+                    "validation_results": [
+                        0.365625,
+                        0.044791666666666646,
+                        12823.0
+                    ],
+                    "params": {
+                        "pooling": "mean",
+                        "model": "GraphConv",
+                        "qfe_layers": 4,
+                        "layers": 4,
+                        "hidden": 51,
+                        "dropout": 0.4891413117022927,
+                        "lr": 0.0016437101335851094,
+                        "weight_decay": 2.245846691971606e-05
+                    }
+                },
+                {
+                    "number": 140,
+                    "validation_results": [
+                        0.38541666666666663,
+                        0.03125,
+                        71920.0
+                    ],
+                    "params": {
+                        "pooling": "sum",
+                        "model": "GAT",
+                        "qfe_layers": 3,
+                        "layers": 4,
+                        "hidden": 182,
+                        "dropout": 0.4209636323752592,
+                        "lr": 0.00026141362930627083,
+                        "weight_decay": 9.237525661397632e-05
+                    }
+                },
+                {
+                    "number": 162,
+                    "validation_results": [
+                        0.3104166666666667,
+                        0.027083333333333348,
+                        5167.0
+                    ],
+                    "params": {
+                        "pooling": "max",
+                        "model": "GAT",
+                        "qfe_layers": 4,
+                        "layers": 3,
+                        "hidden": 59,
+                        "dropout": 0.22935483348261693,
+                        "lr": 0.002267932307343888,
+                        "weight_decay": 0.0002512070662204294
+                    }
+                }
+            ]
+        },
+        "MLP-2^D": {
+            "best_all": [
+                {
+                    "number": 192,
+                    "validation_results": [
+                        0.47916666666666663,
+                        0.029166666666666646,
+                        110179.0
+                    ],
+                    "params": {
+                        "pooling": "mean",
+                        "model": "GraphConv",
+                        "layers": 4,
+                        "hidden": 163,
+                        "dropout": 0.11119802846967691,
+                        "lr": 0.0005780585574144656,
+                        "weight_decay": 0.00012669397596730756
+                    }
+                },
+                {
+                    "number": 90,
+                    "validation_results": [
+                        0.35520833333333335,
+                        0.01979166666666668,
+                        7174.0
+                    ],
+                    "params": {
+                        "pooling": "mean",
+                        "model": "GraphConv",
+                        "layers": 3,
+                        "hidden": 54,
+                        "dropout": 0.07523416561788293,
+                        "lr": 0.0005873658988140672,
+                        "weight_decay": 0.0001378432882264118
+                    }
+                },
+                {
+                    "number": 182,
+                    "validation_results": [
+                        0.3229166666666667,
+                        0.012500000000000011,
+                        1960.0
+                    ],
+                    "params": {
+                        "pooling": "max",
+                        "model": "GraphConv",
+                        "layers": 2,
+                        "hidden": 86,
+                        "dropout": 0.2750011050852701,
+                        "lr": 0.0029768050928872043,
+                        "weight_decay": 4.4372220147095826e-05
+                    }
+                },
+                {
+                    "number": 122,
+                    "validation_results": [
+                        0.34062500000000007,
+                        0.01145833333333332,
+                        4329.0
+                    ],
+                    "params": {
+                        "pooling": "max",
+                        "model": "GCN",
+                        "layers": 8,
+                        "hidden": 25,
+                        "dropout": 0.49962113706751166,
+                        "lr": 0.009865259419118826,
+                        "weight_decay": 2.0578003216838137e-05
+                    }
+                },
+                {
+                    "number": 161,
+                    "validation_results": [
+                        0.33958333333333335,
+                        0.024999999999999994,
+                        1701.0
+                    ],
+                    "params": {
+                        "pooling": "sum",
+                        "model": "GraphSAGE",
+                        "layers": 4,
+                        "hidden": 17,
+                        "dropout": 0.3036760974891106,
+                        "lr": 0.002643652724434082,
+                        "weight_decay": 0.00032121280634774685
+                    }
+                }
+            ],
+            "best_acc": [
+                {
+                    "number": 192,
+                    "validation_results": [
+                        0.47916666666666663,
+                        0.029166666666666646,
+                        110179.0
+                    ],
+                    "params": {
+                        "pooling": "mean",
+                        "model": "GraphConv",
+                        "layers": 4,
+                        "hidden": 163,
+                        "dropout": 0.11119802846967691,
+                        "lr": 0.0005780585574144656,
+                        "weight_decay": 0.00012669397596730756
+                    }
+                },
+                {
+                    "number": 35,
+                    "validation_results": [
+                        0.39999999999999997,
+                        0.06875000000000003,
+                        177634.0
+                    ],
+                    "params": {
+                        "pooling": "max",
+                        "model": "GraphSAGE",
+                        "layers": 5,
+                        "hidden": 170,
+                        "dropout": 0.4667241817260067,
+                        "lr": 0.0009097755586021735,
+                        "weight_decay": 0.0001560169631080564
+                    }
+                },
+                {
+                    "number": 133,
+                    "validation_results": [
+                        0.3864583333333333,
+                        0.09687499999999999,
+                        446614.0
+                    ],
+                    "params": {
+                        "pooling": "sum",
+                        "model": "GraphSAGE",
+                        "layers": 7,
+                        "hidden": 210,
+                        "dropout": 0.16050678282661557,
+                        "lr": 7.067358169661132e-05,
+                        "weight_decay": 0.0008746080134512996
+                    }
+                },
+                {
+                    "number": 183,
+                    "validation_results": [
+                        0.40208333333333335,
+                        0.04791666666666666,
+                        73090.0
+                    ],
+                    "params": {
+                        "pooling": "max",
+                        "model": "GAT",
+                        "layers": 7,
+                        "hidden": 118,
+                        "dropout": 0.3032963468496636,
+                        "lr": 0.0014876939863668625,
+                        "weight_decay": 0.0002534935723246748
+                    }
+                },
+                {
+                    "number": 79,
+                    "validation_results": [
+                        0.4708333333333333,
+                        0.08333333333333329,
+                        89971.0
+                    ],
+                    "params": {
+                        "pooling": "sum",
+                        "model": "GraphSAGE",
+                        "layers": 4,
+                        "hidden": 147,
+                        "dropout": 0.11925967525555142,
+                        "lr": 0.0009707089441082904,
+                        "weight_decay": 0.00043273664952776943
+                    }
+                }
+            ],
+            "low_params": [
+                {
+                    "number": 192,
+                    "validation_results": [
+                        0.47916666666666663,
+                        0.029166666666666646,
+                        110179.0
+                    ],
+                    "params": {
+                        "pooling": "mean",
+                        "model": "GraphConv",
+                        "layers": 4,
+                        "hidden": 163,
+                        "dropout": 0.11119802846967691,
+                        "lr": 0.0005780585574144656,
+                        "weight_decay": 0.00012669397596730756
+                    }
+                },
+                {
+                    "number": 168,
+                    "validation_results": [
+                        0.3364583333333333,
+                        0.06770833333333337,
+                        2503.0
+                    ],
+                    "params": {
+                        "pooling": "max",
+                        "model": "GAT",
+                        "layers": 3,
+                        "hidden": 41,
+                        "dropout": 0.17127175168768188,
+                        "lr": 0.0020078810018100035,
+                        "weight_decay": 0.00027753013937726625
+                    }
+                },
+                {
+                    "number": 111,
+                    "validation_results": [
+                        0.3510416666666667,
+                        0.046875,
+                        439.0
+                    ],
+                    "params": {
+                        "pooling": "max",
+                        "model": "GAT",
+                        "layers": 2,
+                        "hidden": 21,
+                        "dropout": 0.07063025100515469,
+                        "lr": 0.0041578289380610365,
+                        "weight_decay": 0.0004650353084764081
+                    }
+                },
+                {
+                    "number": 131,
+                    "validation_results": [
+                        0.40104166666666663,
+                        0.030208333333333365,
+                        10008.0
+                    ],
+                    "params": {
+                        "pooling": "mean",
+                        "model": "GAT",
+                        "layers": 8,
+                        "hidden": 38,
+                        "dropout": 0.22412771568846962,
+                        "lr": 0.004376179340795335,
+                        "weight_decay": 0.00020768435731368176
+                    }
+                },
+                {
+                    "number": 182,
+                    "validation_results": [
+                        0.4385416666666666,
+                        0.06770833333333334,
+                        25858.0
+                    ],
+                    "params": {
+                        "pooling": "mean",
+                        "model": "GraphConv",
+                        "layers": 3,
+                        "hidden": 108,
+                        "dropout": 0.03954706698504362,
+                        "lr": 0.001355239922161365,
+                        "weight_decay": 0.0007099513562507306
+                    }
+                }
+            ]
+        },
+        "MLP-D": {
+            "best_all": [
+                {
+                    "number": 21,
+                    "validation_results": [
+                        0.30729166666666663,
+                        0.015624999999999972,
+                        2242.0
+                    ],
+                    "params": {
+                        "pooling": "mean",
+                        "model": "GAT",
+                        "layers": 2,
+                        "hidden": 168,
+                        "dropout": 0.09806021907383433,
+                        "lr": 0.00040023522896161885,
+                        "weight_decay": 0.00014920318381588996
+                    }
+                },
+                {
+                    "number": 114,
+                    "validation_results": [
+                        0.3510416666666667,
+                        0.021875000000000006,
+                        46345.0
+                    ],
+                    "params": {
+                        "pooling": "mean",
+                        "model": "GraphConv",
+                        "layers": 8,
+                        "hidden": 61,
+                        "dropout": 0.3932020989121486,
+                        "lr": 0.002927356928111784,
+                        "weight_decay": 0.0005781575752949599
+                    }
+                },
+                {
+                    "number": 47,
+                    "validation_results": [
+                        0.25520833333333337,
+                        0.009374999999999994,
+                        1960.0
+                    ],
+                    "params": {
+                        "pooling": "sum",
+                        "model": "GCN",
+                        "layers": 2,
+                        "hidden": 174,
+                        "dropout": 0.23857167671813784,
+                        "lr": 0.000166899366798093,
+                        "weight_decay": 1.3647402550062669e-05
+                    }
+                },
+                {
+                    "number": 154,
+                    "validation_results": [
+                        0.37083333333333335,
+                        0.016666666666666663,
+                        15686.0
+                    ],
+                    "params": {
+                        "pooling": "max",
+                        "model": "GCN",
+                        "layers": 9,
+                        "hidden": 46,
+                        "dropout": 0.12747452450061186,
+                        "lr": 0.0020353572287507295,
+                        "weight_decay": 1.0736201569852827e-05
+                    }
+                },
+                {
+                    "number": 180,
+                    "validation_results": [
+                        0.34687499999999993,
+                        0.030208333333333365,
+                        9583.0
+                    ],
+                    "params": {
+                        "pooling": "mean",
+                        "model": "GraphSAGE",
+                        "layers": 6,
+                        "hidden": 33,
+                        "dropout": 0.26973103110043706,
+                        "lr": 0.006464013513817948,
+                        "weight_decay": 0.00017202734621722288
+                    }
+                }
+            ],
+            "best_acc": [
+                {
+                    "number": 185,
+                    "validation_results": [
+                        0.4229166666666666,
+                        0.033333333333333354,
+                        54766.0
+                    ],
+                    "params": {
+                        "pooling": "mean",
+                        "model": "GraphSAGE",
+                        "layers": 3,
+                        "hidden": 160,
+                        "dropout": 0.28685509532090203,
+                        "lr": 0.0005317629522639005,
+                        "weight_decay": 2.9526644910509796e-05
+                    }
+                },
+                {
+                    "number": 193,
+                    "validation_results": [
+                        0.41354166666666664,
+                        0.06354166666666666,
+                        237913.0
+                    ],
+                    "params": {
+                        "pooling": "sum",
+                        "model": "GraphSAGE",
+                        "layers": 4,
+                        "hidden": 241,
+                        "dropout": 0.0906857073442639,
+                        "lr": 0.0002155665062155246,
+                        "weight_decay": 3.297741334493721e-05
+                    }
+                },
+                {
+                    "number": 116,
+                    "validation_results": [
+                        0.4229166666666666,
+                        0.04999999999999996,
+                        84179.0
+                    ],
+                    "params": {
+                        "pooling": "mean",
+                        "model": "GraphConv",
+                        "layers": 6,
+                        "hidden": 101,
+                        "dropout": 0.45778222397076934,
+                        "lr": 0.000578779162314207,
+                        "weight_decay": 0.0001085301679544764
+                    }
+                },
+                {
+                    "number": 197,
+                    "validation_results": [
+                        0.41250000000000003,
+                        0.05624999999999997,
+                        54172.0
+                    ],
+                    "params": {
+                        "pooling": "max",
+                        "model": "GraphSAGE",
+                        "layers": 5,
+                        "hidden": 93,
+                        "dropout": 0.3246640743849699,
+                        "lr": 0.0007993270304702949,
+                        "weight_decay": 4.1970467055253766e-05
+                    }
+                },
+                {
+                    "number": 91,
+                    "validation_results": [
+                        0.428125,
+                        0.07604166666666665,
+                        100978.0
+                    ],
+                    "params": {
+                        "pooling": "mean",
+                        "model": "GraphConv",
+                        "layers": 4,
+                        "hidden": 156,
+                        "dropout": 0.3104898131590308,
+                        "lr": 0.000632591285809789,
+                        "weight_decay": 7.759822554781335e-05
+                    }
+                }
+            ],
+            "low_params": [
+                {
+                    "number": 59,
+                    "validation_results": [
+                        0.41562499999999997,
+                        0.048958333333333326,
+                        4477.0
+                    ],
+                    "params": {
+                        "pooling": "mean",
+                        "model": "GraphConv",
+                        "layers": 2,
+                        "hidden": 211,
+                        "dropout": 0.2722307833698931,
+                        "lr": 0.0028791951294384137,
+                        "weight_decay": 0.00019649155237659412
+                    }
+                },
+                {
+                    "number": 162,
+                    "validation_results": [
+                        0.3416666666666667,
+                        0.0604166666666667,
+                        1327.0
+                    ],
+                    "params": {
+                        "pooling": "mean",
+                        "model": "GraphConv",
+                        "layers": 2,
+                        "hidden": 61,
+                        "dropout": 0.3932020989121486,
+                        "lr": 0.002081456841889929,
+                        "weight_decay": 0.0001136872550257928
+                    }
+                },
+                {
+                    "number": 72,
+                    "validation_results": [
+                        0.36874999999999997,
+                        0.07916666666666666,
+                        3469.0
+                    ],
+                    "params": {
+                        "pooling": "mean",
+                        "model": "GraphConv",
+                        "layers": 2,
+                        "hidden": 163,
+                        "dropout": 0.3761257998134303,
+                        "lr": 0.004274189225509434,
+                        "weight_decay": 1.2104933634623098e-05
+                    }
+                },
+                {
+                    "number": 25,
+                    "validation_results": [
+                        0.3395833333333333,
+                        0.06458333333333333,
+                        3256.0
+                    ],
+                    "params": {
+                        "pooling": "mean",
+                        "model": "GAT",
+                        "layers": 2,
+                        "hidden": 246,
+                        "dropout": 0.2742666815929614,
+                        "lr": 0.004633078382757259,
+                        "weight_decay": 0.00018236879259353196
+                    }
+                },
+                {
+                    "number": 38,
+                    "validation_results": [
+                        0.3875,
+                        0.0708333333333333,
+                        739.0
+                    ],
+                    "params": {
+                        "pooling": "mean",
+                        "model": "GraphSAGE",
+                        "layers": 2,
+                        "hidden": 33,
+                        "dropout": 0.11707454155031383,
+                        "lr": 0.006464013513817948,
+                        "weight_decay": 0.00017202734621722288
+                    }
+                }
+            ]
+        },
+        "none": {
+            "best_all": [
+                {
+                    "number": 161,
+                    "validation_results": [
+                        0.378125,
+                        0.021875000000000033,
+                        3303.0
+                    ],
+                    "params": {
+                        "pooling": "max",
+                        "model": "GraphConv",
+                        "layers": 2,
+                        "hidden": 157,
+                        "dropout": 0.34979172393542884,
+                        "lr": 0.00832435873369974,
+                        "weight_decay": 1.6021892523989094e-05
+                    }
+                },
+                {
+                    "number": 10,
+                    "validation_results": [
+                        0.27083333333333337,
+                        0.008333333333333304,
+                        2946.0
+                    ],
+                    "params": {
+                        "pooling": "sum",
+                        "model": "GraphConv",
+                        "layers": 2,
+                        "hidden": 140,
+                        "dropout": 0.10371211627967147,
+                        "lr": 0.001959306119033906,
+                        "weight_decay": 8.543517603764213e-05
+                    }
+                },
+                {
+                    "number": 2,
+                    "validation_results": [
+                        0.45625,
+                        0.04375000000000001,
+                        11583.0
+                    ],
+                    "params": {
+                        "pooling": "max",
+                        "model": "GraphSAGE",
+                        "layers": 4,
+                        "hidden": 51,
+                        "dropout": 0.470318220409016,
+                        "lr": 0.001532587858922363,
+                        "weight_decay": 1.800041752549355e-05
+                    }
+                },
+                {
+                    "number": 69,
+                    "validation_results": [
+                        0.3572916666666667,
+                        0.021875000000000006,
+                        36741.0
+                    ],
+                    "params": {
+                        "pooling": "max",
+                        "model": "GraphConv",
+                        "layers": 4,
+                        "hidden": 93,
+                        "dropout": 0.017933260400279594,
+                        "lr": 0.00534951515013496,
+                        "weight_decay": 7.868023630396309e-05
+                    }
+                },
+                {
+                    "number": 83,
+                    "validation_results": [
+                        0.425,
+                        0.020833333333333315,
+                        22417.0
+                    ],
+                    "params": {
+                        "pooling": "sum",
+                        "model": "GCN",
+                        "layers": 6,
+                        "hidden": 73,
+                        "dropout": 0.05638139825382099,
+                        "lr": 0.0011705666422514103,
+                        "weight_decay": 1.2417473266162184e-05
+                    }
+                }
+            ],
+            "best_acc": [
+                {
+                    "number": 10,
+                    "validation_results": [
+                        0.5489583333333333,
+                        0.03229166666666672,
+                        440143.0
+                    ],
+                    "params": {
+                        "pooling": "sum",
+                        "model": "GraphSAGE",
+                        "layers": 6,
+                        "hidden": 233,
+                        "dropout": 0.0031628879424360767,
+                        "lr": 8.667545237692778e-05,
+                        "weight_decay": 5.8965854300890184e-05
+                    }
+                },
+                {
+                    "number": 144,
+                    "validation_results": [
+                        0.5197916666666667,
+                        0.07604166666666667,
+                        381410.0
+                    ],
+                    "params": {
+                        "pooling": "sum",
+                        "model": "GraphSAGE",
+                        "layers": 7,
+                        "hidden": 194,
+                        "dropout": 0.22812363730084784,
+                        "lr": 0.00029015213311255316,
+                        "weight_decay": 2.962126586217625e-05
+                    }
+                },
+                {
+                    "number": 176,
+                    "validation_results": [
+                        0.4802083333333333,
+                        0.08645833333333336,
+                        176553.0
+                    ],
+                    "params": {
+                        "pooling": "max",
+                        "model": "GraphSAGE",
+                        "layers": 6,
+                        "hidden": 147,
+                        "dropout": 0.470318220409016,
+                        "lr": 0.002177862423175869,
+                        "weight_decay": 1.800041752549355e-05
+                    }
+                },
+                {
+                    "number": 106,
+                    "validation_results": [
+                        0.47395833333333337,
+                        0.05520833333333333,
+                        292491.0
+                    ],
+                    "params": {
+                        "pooling": "sum",
+                        "model": "GraphSAGE",
+                        "layers": 8,
+                        "hidden": 155,
+                        "dropout": 0.2719561834717037,
+                        "lr": 5.862883982663683e-05,
+                        "weight_decay": 0.00012502050785572974
+                    }
+                },
+                {
+                    "number": 49,
+                    "validation_results": [
+                        0.48020833333333335,
+                        0.04687500000000003,
+                        76011.0
+                    ],
+                    "params": {
+                        "pooling": "max",
+                        "model": "GraphSAGE",
+                        "layers": 4,
+                        "hidden": 135,
+                        "dropout": 0.004685139395138871,
+                        "lr": 0.0006150257771610874,
+                        "weight_decay": 0.0009738440425290726
+                    }
+                }
+            ],
+            "low_params": [
+                {
+                    "number": 5,
+                    "validation_results": [
+                        0.4,
+                        0.03958333333333333,
+                        4752.0
+                    ],
+                    "params": {
+                        "pooling": "max",
+                        "model": "GraphConv",
+                        "layers": 2,
+                        "hidden": 226,
+                        "dropout": 0.38900383892877605,
+                        "lr": 0.00832435873369974,
+                        "weight_decay": 1.9695753826856616e-05
+                    }
+                },
+                {
+                    "number": 18,
+                    "validation_results": [
+                        0.45625000000000004,
+                        0.06666666666666668,
+                        10422.0
+                    ],
+                    "params": {
+                        "pooling": "sum",
+                        "model": "GraphSAGE",
+                        "layers": 7,
+                        "hidden": 31,
+                        "dropout": 0.2118534941158407,
+                        "lr": 0.0018101833498412319,
+                        "weight_decay": 7.624738064082678e-05
+                    }
+                },
+                {
+                    "number": 77,
+                    "validation_results": [
+                        0.4458333333333333,
+                        0.060416666666666646,
+                        4038.0
+                    ],
+                    "params": {
+                        "pooling": "max",
+                        "model": "GraphSAGE",
+                        "layers": 5,
+                        "hidden": 24,
+                        "dropout": 0.16751600683521378,
+                        "lr": 0.0011606117311421063,
+                        "weight_decay": 0.00010150199160145721
+                    }
+                },
+                {
+                    "number": 17,
+                    "validation_results": [
+                        0.38541666666666663,
+                        0.03958333333333333,
+                        14863.0
+                    ],
+                    "params": {
+                        "pooling": "max",
+                        "model": "GCN",
+                        "layers": 4,
+                        "hidden": 83,
+                        "dropout": 0.013688215294814288,
+                        "lr": 0.00534951515013496,
+                        "weight_decay": 7.868023630396309e-05
+                    }
+                },
+                {
+                    "number": 181,
+                    "validation_results": [
+                        0.40312500000000007,
+                        0.07812500000000003,
+                        3765.0
+                    ],
+                    "params": {
+                        "pooling": "max",
+                        "model": "GraphSAGE",
+                        "layers": 2,
+                        "hidden": 179,
+                        "dropout": 0.4459599812169658,
+                        "lr": 0.004425357267271462,
+                        "weight_decay": 8.123038008433661e-05
+                    }
+                }
+            ]
+        }
+    },
+    "accuracies": {
+        "QFE-exp": {
+            "best_all": [
+                0.225,
+                0.2916666666666667,
+                0.275,
+                0.21666666666666667,
+                0.275
+            ],
+            "best_acc": [
+                0.25,
+                0.31666666666666665,
+                0.275,
+                0.15,
+                0.26666666666666666
+            ],
+            "low_params": [
+                0.24166666666666667,
+                0.2916666666666667,
+                0.3,
+                0.25,
+                0.25
+            ]
+        },
+        "QFE-probs": {
+            "best_all": [
+                0.3,
+                0.38333333333333336,
+                0.2833333333333333,
+                0.25,
+                0.4
+            ],
+            "best_acc": [
+                0.3333333333333333,
+                0.36666666666666664,
+                0.25,
+                0.25,
+                0.35833333333333334
+            ],
+            "low_params": [
+                0.24166666666666667,
+                0.35,
+                0.38333333333333336,
+                0.25,
+                0.26666666666666666
+            ]
+        },
+        "MLP-2^D": {
+            "best_all": [
+                0.35,
+                0.375,
+                0.16666666666666666,
+                0.2833333333333333,
+                0.3333333333333333
+            ],
+            "best_acc": [
+                0.31666666666666665,
+                0.36666666666666664,
+                0.31666666666666665,
+                0.38333333333333336,
+                0.23333333333333334
+            ],
+            "low_params": [
+                0.35,
+                0.45,
+                0.19166666666666668,
+                0.36666666666666664,
+                0.3
+            ]
+        },
+        "MLP-D": {
+            "best_all": [
+                0.20833333333333334,
+                0.36666666666666664,
+                0.23333333333333334,
+                0.275,
+                0.48333333333333334
+            ],
+            "best_acc": [
+                0.25,
+                0.4166666666666667,
+                0.4,
+                0.39166666666666666,
+                0.39166666666666666
+            ],
+            "low_params": [
+                0.25833333333333336,
+                0.425,
+                0.26666666666666666,
+                0.20833333333333334,
+                0.425
+            ]
+        },
+        "none": {
+            "best_all": [
+                0.3416666666666667,
+                0.25833333333333336,
+                0.4666666666666667,
+                0.275,
+                0.30833333333333335
+            ],
+            "best_acc": [
+                0.4166666666666667,
+                0.5166666666666667,
+                0.4,
+                0.4083333333333333,
+                0.43333333333333335
+            ],
+            "low_params": [
+                0.325,
+                0.4083333333333333,
+                0.35,
+                0.3333333333333333,
+                0.425
+            ]
+        }
+    },
+    "exps": {
+        "QFE-exp": {
+            "best_all": [
+                "ce8c5973cc3a484aa20067303e0d040f",
+                "bc407aaab9944f9faafbd3e9149cea09",
+                "586d306c23aa4e548ddb5ea20aa4ff3e",
+                "5e9e8609fc1e4b369bccc5386734d780",
+                "eb99415189fc4f439319440f3a8993cb"
+            ],
+            "best_acc": [
+                "fce79c0a80934436bec2342e3bd29469",
+                "34e60a589f4742e794dd000a41469e28",
+                "229b9c394a4d4e57aee5978138a01768",
+                "845489b1d0c54d65b75405e66687d052",
+                "03f2921b92964169aa4d7b8c279a7284"
+            ],
+            "low_params": [
+                "954b75a9679f4ba0a96a99557d98a340",
+                "82caa1dadc054eae9788ee608253537f",
+                "fe45b046d84949c9abe1b592a023fee5",
+                "1448f5ca56564d2d853b8f609477a133",
+                "05f3dd95fa5942b1952aa8e9d23f888f"
+            ]
+        },
+        "QFE-probs": {
+            "best_all": [
+                "3ce525c307ba4fcfab142dd7ad93e7a0",
+                "7ecb8cc3c5fd4fdcbcc7c53fb95e3cf7",
+                "06877b4645f944f7b8c5aba094509a0e",
+                "a66ae6463f7c4b58a6cbdd5ffe81f8d6",
+                "7443d0a33e664e058ca2b7f76d117f7e"
+            ],
+            "best_acc": [
+                "41f55b42851e4af280c42a2003f28113",
+                "c42aa13970f442329c19d8580140fe46",
+                "59819126b0664e2b850c2234ef0a36c5",
+                "9a2318d0c2064b789353c4f9bb4b60ea",
+                "05d2b297398844ae9aa6e4e4b5fc7e03"
+            ],
+            "low_params": [
+                "8cf3b81a9c5847159c3aeb08c144a6f9",
+                "c984e1694a2d4942ad1b3e885db69c2a",
+                "24d22f817af84e95aba2f284a68536b4",
+                "2c100e45eea048d4a7ab91488a4f2411",
+                "770316925c024b74bb4bc741fefe4bdc"
+            ]
+        },
+        "MLP-2^D": {
+            "best_all": [
+                "89f3c787b09a4e8bafb6b98bf347227f",
+                "b4a2ae02e565496891306624bb724344",
+                "05c66b39efa84101b44a254daef6dc9d",
+                "b906d953588f443a9b05494c9046f1f1",
+                "6c36d79bca494755afc804fe0d870f8a"
+            ],
+            "best_acc": [
+                "bcdcb64660594762bd36eafcb60c72f3",
+                "72ccfc572eef4c639059d538c9b5ea16",
+                "38f139afbf7546539ee91e02b91c11d3",
+                "e76e4d638938414c98f9756be2b9aaa3",
+                "ff3f1410393c49b6899cfead98ab6f2d"
+            ],
+            "low_params": [
+                "95e2dd4daec44d0f962850bf82a0e68a",
+                "628fb7d866db46a9b11ba737034d1fbe",
+                "39900bdfcd6e4a228e82c7c8a71f1614",
+                "1eca3e6312fa4940983e1a9739631be0",
+                "bb5d28dbabb8441e88ed10ddac1fa2ae"
+            ]
+        },
+        "MLP-D": {
+            "best_all": [
+                "c22df2c0a13941fab3995437b47cac4e",
+                "0894758119aa4c01b3c7074d073b4b19",
+                "949b3abd2ca7429bb48fb51494264294",
+                "db5e89a3eb9246e6899457182e3efb66",
+                "2255e896f13247b884e899285ced9fde"
+            ],
+            "best_acc": [
+                "bff786292dec474aaccdfb941bef87f8",
+                "ebaea214711e4fe8b4b74041eee9b515",
+                "ddf92fb8b23a437982eb59eb2b6b335c",
+                "24a1aae766144c2ea284d23a998e578f",
+                "be3acff288d341cbaf50ff7c762441b9"
+            ],
+            "low_params": [
+                "eda77f4461944a37a64c992bbb77c919",
+                "5202bfeb76ec4e73a26d2c5b02398e2c",
+                "196ec629fee74ce7ae4ea3b3d318bc6c",
+                "48f480fa52e3417983277e58be63617b",
+                "5d5b48b1d15346e3943ad6173a57f7c0"
+            ]
+        },
+        "none": {
+            "best_all": [
+                "35d1fc2c3c61405d9fa356dc4d1a5c0a",
+                "2d16adf6fd1546d68f3418f94fc120d0",
+                "cc2bde2961964e2aaef035f77ebf3bfc",
+                "fc8b6cfe27154956a246f1dd3bbe24c5",
+                "6396241eb4c746b9a70e57fa352a6211"
+            ],
+            "best_acc": [
+                "d7ce6d3f6e03470ca52f67bbce363665",
+                "c1db6545594f4b0bbca1a937514969c9",
+                "1853f9d205a74952954ceab4a6a6d743",
+                "18b933f755e4481ca38cceb2da3494b1",
+                "b60e579f80244398b528bbcf6fcc9212"
+            ],
+            "low_params": [
+                "fee42a4019b14fb1ba2801cfa0e5fe75",
+                "078571df4b8242b58ceb9b65e035293c",
+                "fdad05ccf808469f9f99de792568d54d",
+                "d679dd992803459d9f65a9291dbaa7bb",
+                "1b405ad9c5f04be89cfcfc454a62a4f7"
+            ]
+        }
+    },
+    "results": {
+        "QFE-exp": {
+            "best_all": {
+                "accuracy": 0.25416666666666665,
+                "error": 0.024166666666666697
+            },
+            "best_acc": {
+                "accuracy": 0.23916666666666667,
+                "error": 0.049166666666666664
+            },
+            "low_params": {
+                "accuracy": 0.2666666666666667,
+                "error": 0.02000000000000003
+            }
+        },
+        "QFE-probs": {
+            "best_all": {
+                "accuracy": 0.32666666666666666,
+                "error": 0.04999999999999999
+            },
+            "best_acc": {
+                "accuracy": 0.31,
+                "error": 0.043333333333333335
+            },
+            "low_params": {
+                "accuracy": 0.3025,
+                "error": 0.05083333333333334
+            }
+        },
+        "MLP-2^D": {
+            "best_all": {
+                "accuracy": 0.2808333333333333,
+                "error": 0.06750000000000002
+            },
+            "best_acc": {
+                "accuracy": 0.31333333333333335,
+                "error": 0.046666666666666634
+            },
+            "low_params": {
+                "accuracy": 0.3225,
+                "error": 0.07416666666666666
+            }
+        },
+        "MLP-D": {
+            "best_all": {
+                "accuracy": 0.3341666666666667,
+                "error": 0.09416666666666665
+            },
+            "best_acc": {
+                "accuracy": 0.3416666666666667,
+                "error": 0.061666666666666675
+            },
+            "low_params": {
+                "accuracy": 0.3166666666666667,
+                "error": 0.07666666666666666
+            }
+        },
+        "none": {
+            "best_all": {
+                "accuracy": 0.35500000000000004,
+                "error": 0.07000000000000006
+            },
+            "best_acc": {
+                "accuracy": 0.45166666666666666,
+                "error": 0.041666666666666685
+            },
+            "low_params": {
+                "accuracy": 0.3726886517077961,
+                "error": 0.036021985041129495
+            }
+        }
+    }
+}
