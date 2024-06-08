@@ -10,14 +10,15 @@ from scipy.stats import bootstrap
 from tqdm import tqdm
 import string
 import random
-from fvcore.nn import FlopCountAnalysis
-import optuna
+import math
+from optuna import TrialPruned
+import gc
 
 from config import get_args, get_hparams_from_args, Embedder
 from model import build_model
 from dataset import get_dataset
 
-def setup_comet_experiment(args):
+def setup_comet_experiment(args, exp_name=None):
     # Prepare CometML
     comet_ml.init()
     comet_args = {
@@ -31,6 +32,9 @@ def setup_comet_experiment(args):
         experiment_class = comet_ml.OfflineExperiment if args.offline else comet_ml.Experiment
     
     exp = experiment_class(**comet_args)
+
+    if exp_name:
+        exp.set_name(exp_name)
 
     hparams = get_hparams_from_args(args)
 
@@ -61,7 +65,10 @@ def log_model(run_key, model, optimizer, epoch, fold, patience_cnt, finished=Fal
         exp.log_model("fold-{fold}-model", model_filename, overwrite=True)
 
 
-def train(model, device, train_loader, test_loader, args, fold, exp_key=None, cml_exp=None, model_checkpoint=None):
+def train(
+        model, device, train_loader, test_loader, args, fold,
+        exp_key=None, save_checkpoints=True, cml_exp=None, model_checkpoint=None
+        ):
     optimizer = torch.optim.Adam(model.parameters(), lr=args.lr, weight_decay=args.weight_decay)
     if model_checkpoint is not None:
         optimizer.load_state_dict(model_checkpoint["optimizer_state_dict"])
@@ -104,7 +111,7 @@ def train(model, device, train_loader, test_loader, args, fold, exp_key=None, cm
                     cml_exp.stop_early(epoch)
                 break
         
-        if epoch % 50 == 0 and not epoch == args.epochs-1 and exp_key:
+        if epoch % 50 == 0 and not epoch == args.epochs-1 and exp_key and save_checkpoints:
             log_model(exp_key, model, optimizer, epoch, fold, patience_cnt, exp=cml_exp)
 
         if cml_exp:    
@@ -142,7 +149,7 @@ def test(model, device, data_loader):
 def count_parameters(model):
     return sum(p.numel() for p in model.parameters() if p.requires_grad)
 
-def run_experiment(args, trial=None):
+def run_experiment(args, train_ds, save_checkpoints=True):
     cml_exp = None
     if args.comet_ml:
         cml_exp = setup_comet_experiment(args)
@@ -167,18 +174,10 @@ def run_experiment(args, trial=None):
 
     device = torch.device(args.device)
 
-    # Get dataset
-    ds = get_dataset(args.dataset)
-
-    skf = StratifiedKFold(n_splits=args.k_folds, shuffle=True, random_state=args.seed)
-
-    train_index, test_index = next(skf.split(ds, ds.y))
-    train_ds = ds[train_index]
-    del test_index
-
     k_fold_accuracies = []
 
-    # Setup the K-Folded Experiments
+    # Inner cross-validation
+    skf = StratifiedKFold(n_splits=args.k_folds, shuffle=True, random_state=args.seed)
     for fold, (train_index, val_index) in enumerate(skf.split(train_ds, train_ds.y)):
         print(f"Fold {fold}")
 
@@ -208,15 +207,15 @@ def run_experiment(args, trial=None):
         if not model_checkpoint or not model_checkpoint["finished"]:
             model = train(
                 model, device, train_loader, val_loader,
-                args, fold, exp_key=exp_key, cml_exp=cml_exp,
+                args, fold, exp_key=exp_key,
+                save_checkpoints=save_checkpoints,
+                cml_exp=cml_exp,
                 model_checkpoint=model_checkpoint
             )
         else:
             print(f"Fold {fold} already finished. Skipping training.")
 
         # TEST
-        # Since we will tune hyperparaters on separate runs,
-        # we still need to use the validation set here.
         acc, _, actual, predicted = test(model, device, val_loader)
 
         if cml_exp:
@@ -224,6 +223,11 @@ def run_experiment(args, trial=None):
             cml_exp.log_confusion_matrix(actual, predicted, file_name=f"fold-{fold}-test-confusion_matrix.json")
 
         k_fold_accuracies.append(acc)
+
+        torch.cuda.empty_cache()
+        gc.collect()
+
+    print(k_fold_accuracies)
 
     # Bootstrap the accuracies to get confidence interval
     res = bootstrap((k_fold_accuracies,), np.mean, confidence_level=0.95)
@@ -233,6 +237,14 @@ def run_experiment(args, trial=None):
 
     param_count = count_parameters(model)
     print(f"Model has {param_count} parameters")
+
+    if math.isnan(m):
+        """
+        This is likely caused by the model failing in exactly the same
+        way for all folds; this would cause an Optuna error, but we don't
+        want Optuna to retry so we'll prune this experiment.
+        """
+        raise TrialPruned()
 
     if cml_exp:
         cml_exp.log_metric("accuracy", m)
@@ -244,4 +256,12 @@ def run_experiment(args, trial=None):
 
 if __name__ == "__main__":
     args = get_args()
-    run_experiment(args)
+
+    ds = get_dataset(args.dataset)
+
+    skf = StratifiedKFold(n_splits=args.k_folds, shuffle=True, random_state=args.seed)
+    train_index, test_index = next(skf.split(ds, ds.y))
+    train_ds = ds[train_index]
+    del test_index
+
+    run_experiment(args, train_ds)

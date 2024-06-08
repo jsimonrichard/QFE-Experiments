@@ -5,8 +5,7 @@ __pycache__/
 
 # Training and tuning outputs
 checkpoints/
-process_out/
-optuna_studies.db
+study_outputs/
 
 # Venv
 qfe_exp_venv/
