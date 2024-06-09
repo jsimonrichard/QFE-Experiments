@@ -1,5 +1,5 @@
-import comet_ml # import first so that data from torch and sklearn can be automatically logged
-import os
+import comet_ml  # import first so that data from torch and sklearn can be automatically logged
+import os, sys
 from dotenv import load_dotenv
 import argparse
 from sklearn.model_selection import StratifiedKFold
@@ -11,6 +11,7 @@ from scipy.stats import bootstrap
 import json
 from copy import deepcopy
 
+sys.path.insert(0, os.path.dirname(__file__))
 from config import EnumAction, Dataset, Embedder, ClassicalModel, Pooling, gen_args
 from dataset import get_dataset
 from test import run_test
@@ -35,17 +36,14 @@ def get_best_utility_trials(best_trials):
             err_z = -(trial.values[1] - err_mean) / err_std
             param_z = -(trial.values[2] - param_mean) / param_std
             return acc_weight * acc_z + err_weight * err_z + param_weight * param_z
+
         return utility
 
     best_all = max(best_trials, key=gen_utility(1, 1, 1))
     best_acc = max(best_trials, key=gen_utility(1, 0, 0))
     low_params = max(best_trials, key=gen_utility(1, 0, 3))
 
-    return {
-        "best_all": best_all,
-        "best_acc": best_acc,
-        "low_params": low_params
-    }
+    return {"best_all": best_all, "best_acc": best_acc, "low_params": low_params}
 
 
 def gen_args_from_optuna_params(dataset, embedder, params):
@@ -56,13 +54,7 @@ def gen_args_from_optuna_params(dataset, embedder, params):
     del params["pooling"]
 
     args = gen_args(
-        dataset,
-        embedder,
-        model,
-        pooling,
-        batch_size=1024,
-        comet_ml=True,
-        **params
+        dataset, embedder, model, pooling, batch_size=1024, comet_ml=True, **params
     )
 
     return args
@@ -97,22 +89,22 @@ def run_tests(storage, ds):
                 print(f"Best {name} validation results: {trial.values}")
                 print(f"Best {name} params: {trial.params}")
 
-                best_trials[embedder][name].append({
-                    "number": trial.number,
-                    "validation_results": trial.values,
-                    "params": trial.params
-                })
+                best_trials[embedder][name].append(
+                    {
+                        "number": trial.number,
+                        "validation_results": trial.values,
+                        "params": trial.params,
+                    }
+                )
 
                 test_args = gen_args_from_optuna_params(
-                    args.dataset,
-                    embedder,
-                    trial.params
+                    args.dataset, embedder, trial.params
                 )
                 acc, _, exp_key = run_test(
                     test_args,
                     train_ds,
                     test_ds,
-                    exp_name=f"dataset-{args.dataset.value}/embedder-{embedder.value}/utility-{name}/fold-{fold}"
+                    exp_name=f"dataset-{args.dataset.value}/embedder-{embedder.value}/utility-{name}/fold-{fold}",
                 )
 
                 accuracies[embedder][name].append(acc)
@@ -121,7 +113,7 @@ def run_tests(storage, ds):
                 print(f"Test Accuracy: {acc}")
                 print(f"Experiment Key: {exp_key}")
                 print()
-    
+
     return best_trials, accuracies, exps
 
 
@@ -131,31 +123,32 @@ def calc_results(accuracies):
     for embedder, embedder_accs in accuracies.items():
         for name, accs in embedder_accs.items():
             res = bootstrap((accs,), np.mean, confidence_level=0.95)
-            acc = (res.confidence_interval.low + res.confidence_interval.high)/2
-            e = (res.confidence_interval.high - res.confidence_interval.low)/2
+            acc = (res.confidence_interval.low + res.confidence_interval.high) / 2
+            e = (res.confidence_interval.high - res.confidence_interval.low) / 2
 
-            results[embedder][name] = {
-                "accuracy": acc,
-                "error": e
-            }
-    
+            results[embedder][name] = {"accuracy": acc, "error": e}
+
     return results
+
 
 if __name__ == "__main__":
     load_dotenv()
 
     parser = argparse.ArgumentParser(description="Run all studies")
-    parser.add_argument('--dataset', action=EnumAction, enum_type=Dataset, required=True,
-                        help='Choose a dataset from: %(choices)s')
-    parser.add_argument('--seed', type=int, default=42, help='Random seed')
-    parser.add_argument('--hgp-sl', action="store_true", help='Use HGP-SL pooling')
+    parser.add_argument(
+        "--dataset",
+        action=EnumAction,
+        enum_type=Dataset,
+        required=True,
+        help="Choose a dataset from: %(choices)s",
+    )
+    parser.add_argument("--seed", type=int, default=42, help="Random seed")
+    parser.add_argument("--hgp-sl", action="store_true", help="Use HGP-SL pooling")
     args = parser.parse_args()
 
     ds = get_dataset(args.dataset)
 
-    storage = RDBStorage(
-        url=os.getenv("OPTUNA_DB")
-    )
+    storage = RDBStorage(url=os.getenv("OPTUNA_DB"))
 
     best_trials, accuracies, exps = run_tests(storage, ds)
     print("\n Calculating results...")
@@ -166,12 +159,11 @@ if __name__ == "__main__":
         "best_trials": best_trials,
         "accuracies": accuracies,
         "exps": exps,
-        "results": results
+        "results": results,
     }
     os.makedirs(f"study_outputs/dataset-{args.dataset}", exist_ok=True)
     results_file = f"study_outputs/dataset-{args.dataset}/results.json"
     with open(results_file, "w") as f:
         json.dump(data, f, indent=4)
-    
-    print(f"Results saved to {results_file}")
 
+    print(f"Results saved to {results_file}")
