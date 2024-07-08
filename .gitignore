@@ -2,6 +2,7 @@
 __pycache__/
 .env
 .comet.config
+generated_images/
 
 # Training and tuning outputs
 checkpoints/
