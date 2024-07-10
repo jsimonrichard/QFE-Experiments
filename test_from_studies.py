@@ -143,7 +143,6 @@ if __name__ == "__main__":
         help="Choose a dataset from: %(choices)s",
     )
     parser.add_argument("--seed", type=int, default=42, help="Random seed")
-    parser.add_argument("--hgp-sl", action="store_true", help="Use HGP-SL pooling")
     args = parser.parse_args()
 
     ds = get_dataset(args.dataset)

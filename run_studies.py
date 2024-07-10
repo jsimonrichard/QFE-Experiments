@@ -15,27 +15,24 @@ from train import run_experiment
 
 TRIALS_PER_FOLD = 200
 
-def objective(trial, dataset: Dataset, embedder: Embedder, fold, train_ds, hgp_sl=False):
-    
+
+def objective(trial, dataset: Dataset, embedder: Embedder, fold, train_ds):
+
     log_folder = f"./study_outputs/dataset-{dataset.value}/embedder-{embedder.value}"
     log_prefix = f"{log_folder}/fold-{fold}"
 
     os.makedirs(log_folder, exist_ok=True)
-    
+
     # Redirect stdout and stderr to files
     sys.stdout = open(log_prefix + ".out", "a", buffering=1)
     sys.stderr = open(log_prefix + "_error.out", "a", buffering=1)
 
-    if hgp_sl:
-        pooling = Pooling.HGPSL
-    else:
-        pooling = trial.suggest_categorical(
-            "pooling",
-            [Pooling.SUM, Pooling.MEAN, Pooling.MAX]
-        )
-        # Sometimes the pooling is returned as a string for some reason
-        if type(pooling) == str:
-            pooling = Pooling[pooling.upper()]
+    pooling = trial.suggest_categorical(
+        "pooling", [Pooling.SUM, Pooling.MEAN, Pooling.MAX]
+    )
+    # Sometimes the pooling is returned as a string for some reason
+    if type(pooling) == str:
+        pooling = Pooling[pooling.upper()]
 
     model = trial.suggest_categorical("model", list(ClassicalModel))
     # Sometimes the model is returned as a string for some reason
@@ -46,7 +43,7 @@ def objective(trial, dataset: Dataset, embedder: Embedder, fold, train_ds, hgp_s
         qfe_layers = trial.suggest_int("qfe_layers", 1, 4)
     else:
         qfe_layers = 2
-    
+
     # Generate arguments
     args = gen_args(
         dataset=dataset,
@@ -59,7 +56,7 @@ def objective(trial, dataset: Dataset, embedder: Embedder, fold, train_ds, hgp_s
         dropout=trial.suggest_float("dropout", 0.0, 0.5),
         lr=trial.suggest_float("lr", 1e-5, 1e-2, log=True),
         weight_decay=trial.suggest_float("weight_decay", 1e-5, 1e-3, log=True),
-        batch_size=1024
+        batch_size=1024,
     )
 
     result = run_experiment(args, train_ds, save_checkpoints=False)
@@ -69,14 +66,19 @@ def objective(trial, dataset: Dataset, embedder: Embedder, fold, train_ds, hgp_s
 
     return result
 
+
 if __name__ == "__main__":
     load_dotenv()
 
     parser = argparse.ArgumentParser(description="Run all studies")
-    parser.add_argument('--dataset', action=EnumAction, enum_type=Dataset, required=True,
-                        help='Choose a dataset from: %(choices)s')
-    parser.add_argument('--seed', type=int, default=42, help='Random seed')
-    parser.add_argument('--hgp-sl', action="store_true", help='Use HGP-SL pooling')
+    parser.add_argument(
+        "--dataset",
+        action=EnumAction,
+        enum_type=Dataset,
+        required=True,
+        help="Choose a dataset from: %(choices)s",
+    )
+    parser.add_argument("--seed", type=int, default=42, help="Random seed")
     args = parser.parse_args()
 
     ds = get_dataset(args.dataset)
@@ -87,7 +89,9 @@ if __name__ == "__main__":
         grace_period=120,
         failed_trial_callback=RetryFailedTrialCallback(max_retry=3),
     )
-    max_trials_callback = MaxTrialsCallback(TRIALS_PER_FOLD, states=(TrialState.COMPLETE,))
+    max_trials_callback = MaxTrialsCallback(
+        TRIALS_PER_FOLD, states=(TrialState.COMPLETE,)
+    )
 
     # Split dataset in to train and test folds
     folds = StratifiedKFold(n_splits=5, shuffle=True, random_state=args.seed)
@@ -111,20 +115,15 @@ if __name__ == "__main__":
                 directions=["maximize", "minimize", "minimize"],
             )
 
-            current_trials = study.get_trials(deepcopy=False, states=max_trials_callback._states)
+            current_trials = study.get_trials(
+                deepcopy=False, states=max_trials_callback._states
+            )
             if len(current_trials) >= TRIALS_PER_FOLD:
                 print("Already completed. Skipping.")
                 continue
-            
+
             study.optimize(
-                lambda trial: objective(
-                    trial,
-                    args.dataset,
-                    embedder,
-                    fold,
-                    train_ds,
-                    hgp_sl=args.hgp_sl
-                ),
+                lambda trial: objective(trial, args.dataset, embedder, fold, train_ds),
                 n_trials=TRIALS_PER_FOLD,
-                callbacks=[max_trials_callback]
+                callbacks=[max_trials_callback],
             )
