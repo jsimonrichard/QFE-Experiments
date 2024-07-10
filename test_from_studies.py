@@ -14,7 +14,7 @@ from copy import deepcopy
 sys.path.insert(0, os.path.dirname(__file__))
 from config import EnumAction, Dataset, Embedder, ClassicalModel, Pooling, gen_args
 from dataset import get_dataset
-from test import run_test
+from test_ import run_test
 
 
 def get_best_utility_trials(best_trials):
