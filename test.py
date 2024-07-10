@@ -12,6 +12,7 @@ from config import get_args, Embedder
 from model import build_model
 from dataset import get_dataset
 
+
 def run_test(args, train_ds, test_ds, exp_name=None):
     cml_exp = None
     if args.comet_ml:
@@ -22,8 +23,9 @@ def run_test(args, train_ds, test_ds, exp_name=None):
     else:
         exp_key = None
         while exp_key is None or os.path.exists(f"./checkpoints/{exp_key}"):
-            exp_key = ''.join(random.choices(string.ascii_lowercase +
-                                string.digits, k=16))
+            exp_key = "".join(
+                random.choices(string.ascii_lowercase + string.digits, k=16)
+            )
 
     # Reproducibility
     torch.manual_seed(args.seed)
@@ -32,14 +34,15 @@ def run_test(args, train_ds, test_ds, exp_name=None):
 
     device = torch.device(args.device)
 
-    sss = StratifiedShuffleSplit(
-        test_size=0.2,
-        random_state=args.seed
-    )
+    sss = StratifiedShuffleSplit(test_size=0.2, random_state=args.seed)
     train_index, val_index = next(sss.split(train_ds, train_ds.y))
 
-    train_loader = DataLoader(train_ds[train_index], batch_size=args.batch_size, shuffle=True)
-    val_loader = DataLoader(train_ds[val_index], batch_size=args.batch_size, shuffle=False)
+    train_loader = DataLoader(
+        train_ds[train_index], batch_size=args.batch_size, shuffle=True
+    )
+    val_loader = DataLoader(
+        train_ds[val_index], batch_size=args.batch_size, shuffle=False
+    )
     test_loader = DataLoader(test_ds, batch_size=args.batch_size, shuffle=False)
 
     # Handle Restarts
@@ -51,21 +54,29 @@ def run_test(args, train_ds, test_ds, exp_name=None):
             epoch = model_checkpoint["epoch"]
             print(f"Model checkpoint at epoch {epoch} loaded")
 
-    model = build_model(args, train_ds.num_features, train_ds.num_classes).to(device) 
+    model = build_model(args, train_ds.num_features, train_ds.num_classes).to(device)
     if model_checkpoint is not None:
         model.load_state_dict(model_checkpoint["model_state_dict"])
 
     model = train(
-        model, device, train_loader, val_loader,
-        args, 0, exp_key=exp_key, cml_exp=cml_exp,
-        model_checkpoint=model_checkpoint
+        model,
+        device,
+        train_loader,
+        val_loader,
+        args,
+        0,
+        exp_key=exp_key,
+        cml_exp=cml_exp,
+        model_checkpoint=model_checkpoint,
     )
 
     acc, _, actual, predicted = test(model, device, test_loader)
 
     if cml_exp:
         cml_exp.log_metric(f"test/accuracy", acc)
-        cml_exp.log_confusion_matrix(actual, predicted, file_name=f"test-confusion_matrix.json")
+        cml_exp.log_confusion_matrix(
+            actual, predicted, file_name=f"test-confusion_matrix.json"
+        )
 
     param_count = count_parameters(model)
 
@@ -73,7 +84,8 @@ def run_test(args, train_ds, test_ds, exp_name=None):
         cml_exp.log_metric("accuracy", acc)
         cml_exp.log_metric("param_count", param_count)
 
-    return acc, param_count, exp_key
+    return acc, param_count, exp_key, model
+
 
 if __name__ == "__main__":
     args = get_args()
