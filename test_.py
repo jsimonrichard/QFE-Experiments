@@ -84,7 +84,7 @@ def run_test(args, train_ds, test_ds, exp_name=None):
         cml_exp.log_metric("accuracy", acc)
         cml_exp.log_metric("param_count", param_count)
 
-    return acc, param_count, exp_key, model
+    return acc, param_count, exp_key
 
 
 if __name__ == "__main__":
