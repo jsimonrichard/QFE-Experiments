@@ -13,6 +13,7 @@ import random
 import math
 from optuna import TrialPruned
 import gc
+from fvcore.nn import FlopCountAnalysis
 
 from config import get_args, get_hparams_from_args, Embedder
 from model import build_model
@@ -194,6 +195,18 @@ def test(model, device, data_loader):
 # https://discuss.pytorch.org/t/how-do-i-check-the-number-of-parameters-of-a-model/4325/7
 def count_parameters(model):
     return sum(p.numel() for p in model.parameters() if p.requires_grad)
+
+
+def get_flops(model, device, x, edge_index, batch=None):
+    model.eval()
+    return FlopCountAnalysis(
+        model,
+        inputs=(
+            x.to(device),
+            edge_index.to(device),
+            None if batch is None else batch.to(device),
+        ),
+    ).total()
 
 
 def run_experiment(args, train_ds, save_checkpoints=True):
