@@ -5,41 +5,42 @@ from torch.nn import Module, Linear, Parameter
 import torch.nn.functional as F
 from torch_geometric.utils import scatter
 from torch_geometric.nn.models.basic_gnn import GCN, GraphSAGE, GAT, BasicGNN
-from torch_geometric.nn.conv import MessagePassing, GCNConv, GraphConv, SAGEConv, GATConv
+from torch_geometric.nn.conv import (
+    MessagePassing,
+    GCNConv,
+    GraphConv,
+    SAGEConv,
+    GATConv,
+)
 import pennylane as qml
 from typing import Final
 from enum import Enum
 from torch_scatter import scatter_add
-
-# Import from HGP-SL
-module_path = os.path.abspath("./HGP-SL")
-if module_path not in sys.path:
-    sys.path.insert(0, module_path)
-from layers import HGPSLPool
-from models import Model as HGPSLModel
 
 from config import Embedder, ClassicalModel, Pooling
 
 
 # EMBEDDINGS
 
+
 class QFE_MeasureMethod(Enum):
     PROBS = "probs"
     EXP = "exp"
 
+
 def build_qfe_circuit(dev, n_qubits, n_layers, qfe_method: QFE_MeasureMethod):
-    @qml.qnode(dev, interface="torch") #, diff_method="parameter-shift")
+    @qml.qnode(dev, interface="torch")  # , diff_method="parameter-shift")
     def qfe_circuit(inputs, weights):
         # Embedding layer
-        qml.templates.AngleEmbedding(inputs, wires=range(n_qubits), rotation='Y')
+        qml.templates.AngleEmbedding(inputs, wires=range(n_qubits), rotation="Y")
 
         # Entangling layers
         for i in range(n_layers):
             for j in range(n_qubits):
                 qml.RX(weights[i, j], wires=j)
-            
+
             for j in range(n_qubits):
-                qml.CNOT(wires=[j, (j+1)%n_qubits])
+                qml.CNOT(wires=[j, (j + 1) % n_qubits])
 
         # Measurement
         if qfe_method == QFE_MeasureMethod.PROBS:
@@ -48,9 +49,10 @@ def build_qfe_circuit(dev, n_qubits, n_layers, qfe_method: QFE_MeasureMethod):
             return [qml.expval(qml.PauliZ(i)) for i in range(n_qubits)]
         else:
             raise ValueError(f"Invalid QFE Measure Method: {qfe_method}")
-    
+
     weight_shapes = {"weights": (n_layers, n_qubits)}
     return qml.qnn.TorchLayer(qfe_circuit, weight_shapes)
+
 
 class QFE(Module):
     def __init__(self, features, layers, qfe_method: QFE_MeasureMethod):
@@ -58,7 +60,7 @@ class QFE(Module):
         self.wires = features
         self.dev = qml.device("default.qubit", wires=self.wires)
         self.qfe = build_qfe_circuit(self.dev, self.wires, layers, qfe_method)
-    
+
     def forward(self, x):
         prev_device = x.device
         x = x.cpu()
@@ -70,11 +72,12 @@ class MLPEmbedder(Module):
         super().__init__()
         self.fc1 = Linear(features, hidden_neurons)
         self.fc2 = Linear(hidden_neurons, output_dim)
-    
+
     def forward(self, x):
         x = F.relu(self.fc1(x))
         x = F.relu(self.fc2(x))
         return x
+
 
 def build_embedder(args, features):
     # Build Embedder
@@ -83,7 +86,7 @@ def build_embedder(args, features):
         return QFE(features, args.qfe_layers, qfe_method)
     elif args.embedder.value.split("-")[0] == "MLP":
         mlp_type = args.embedder.value.split("-")[1]
-        hidden_neurons = 2 ** features if mlp_type == "2^D" else features
+        hidden_neurons = 2**features if mlp_type == "2^D" else features
         # Since the QML embedders can only output the same number of features
         # as the input, we choose the output dimension to be the same as the input
         return MLPEmbedder(features, hidden_neurons, features)
@@ -92,7 +95,9 @@ def build_embedder(args, features):
     else:
         raise ValueError(f"Invalid Embedder Type: {args.embedder}")
 
+
 # MODELS
+
 
 # Modeled after GCN in torch_geometric.nn
 class GraphConvModel(BasicGNN):
@@ -100,23 +105,26 @@ class GraphConvModel(BasicGNN):
     supports_edge_attr: Final[bool] = False
     supports_norm_batch: Final[bool]
 
-    def init_conv(self, in_channels: int, out_channels: int,
-                  **kwargs) -> MessagePassing:
+    def init_conv(
+        self, in_channels: int, out_channels: int, **kwargs
+    ) -> MessagePassing:
         return GraphConv(in_channels, out_channels, **kwargs)
+
 
 convolutions = {
     ClassicalModel.GCN: GCNConv,
     ClassicalModel.GraphConv: GraphConv,
     ClassicalModel.GraphSAGE: SAGEConv,
-    ClassicalModel.GAT: GATConv
+    ClassicalModel.GAT: GATConv,
 }
 
 models = {
     ClassicalModel.GCN: GCN,
     ClassicalModel.GraphConv: GraphConvModel,
     ClassicalModel.GraphSAGE: GraphSAGE,
-    ClassicalModel.GAT: GAT
+    ClassicalModel.GAT: GAT,
 }
+
 
 class GNNModel(Module):
     def __init__(self, args, features, classes):
@@ -134,7 +142,7 @@ class GNNModel(Module):
             hidden_channels=args.hidden,
             num_layers=args.layers,
             dropout=args.dropout,
-            out_channels=classes
+            out_channels=classes,
         )
 
     def forward(self, x, edge_index, batch=None):
@@ -148,9 +156,10 @@ class GNNModel(Module):
         x = F.log_softmax(x, dim=1)
         return x
 
+
 class SpecialGCN(MessagePassing):
     def __init__(self, in_channels, out_channels, cached=False, bias=True, **kwargs):
-        super().__init__(aggr='add', **kwargs)
+        super().__init__(aggr="add", **kwargs)
 
         self.in_channels = in_channels
         self.out_channels = out_channels
@@ -165,7 +174,7 @@ class SpecialGCN(MessagePassing):
             self.bias = Parameter(torch.Tensor(out_channels))
             nn.init.zeros_(self.bias.data)
         else:
-            self.register_parameter('bias', None)
+            self.register_parameter("bias", None)
 
         self.reset_parameters()
 
@@ -176,12 +185,14 @@ class SpecialGCN(MessagePassing):
     @staticmethod
     def norm(edge_index, num_nodes, edge_weight, dtype=None):
         if edge_weight is None:
-            edge_weight = torch.ones((edge_index.size(1),), dtype=dtype, device=edge_index.device)
+            edge_weight = torch.ones(
+                (edge_index.size(1),), dtype=dtype, device=edge_index.device
+            )
 
         row, col = edge_index
         deg = scatter_add(edge_weight, row, dim=0, dim_size=num_nodes)
         deg_inv_sqrt = deg.pow(-0.5)
-        deg_inv_sqrt[deg_inv_sqrt == float('inf')] = 0
+        deg_inv_sqrt[deg_inv_sqrt == float("inf")] = 0
 
         return edge_index, deg_inv_sqrt[row] * edge_weight * deg_inv_sqrt[col]
 
@@ -191,7 +202,10 @@ class SpecialGCN(MessagePassing):
         if self.cached and self.cached_result is not None:
             if edge_index.size(1) != self.cached_num_edges:
                 raise RuntimeError(
-                    'Cached {} number of edges, but found {}'.format(self.cached_num_edges, edge_index.size(1)))
+                    "Cached {} number of edges, but found {}".format(
+                        self.cached_num_edges, edge_index.size(1)
+                    )
+                )
 
         if not self.cached or self.cached_result is None:
             self.cached_num_edges = edge_index.size(1)
@@ -211,51 +225,10 @@ class SpecialGCN(MessagePassing):
         return aggr_out
 
     def __repr__(self):
-        return '{}({}, {})'.format(self.__class__.__name__, self.in_channels, self.out_channels)
-
-
-class HGPSLModelParametrized(HGPSLModel):
-    def __init__(self, args, features, classes):
-        Module.__init__(self)
-
-        # Default parameters from HGP-SL are noted if not included in config.py
-        self.num_features = features
-        self.nhid = args.hidden # 128
-        self.num_classes = classes
-        self.pooling_ratio = args.pooling_ratio
-        self.dropout_ratio = args.dropout # 0.0
-        self.sample = args.sample_neighbor
-        self.sparse = args.sparse_attention
-        self.sl = args.structure_learning
-        self.lamb = args.lamb
-
-        self.embedder = build_embedder(args, features)
-
-        self.conv = convolutions[args.model]
-        self.model = models[args.model]
-        
-        self.conv1 = self.conv(self.num_features, self.nhid)
-        # self.conv2 = self.conv(self.nhid, self.nhid)
-        # self.conv3 = self.conv(self.nhid, self.nhid)
-        self.conv2 = SpecialGCN(self.nhid, self.nhid)
-        self.conv3 = SpecialGCN(self.nhid, self.nhid)
-
-        self.pool1 = HGPSLPool(self.nhid, self.pooling_ratio, self.sample, self.sparse, self.sl, self.lamb)
-        self.pool2 = HGPSLPool(self.nhid, self.pooling_ratio, self.sample, self.sparse, self.sl, self.lamb)
-
-        self.lin1 = Linear(self.nhid * 2, self.nhid)
-        self.lin2 = Linear(self.nhid, self.nhid // 2)
-        self.lin3 = Linear(self.nhid // 2, self.num_classes)
-    
-    def forward(self, x, edge_index, batch=None):
-        x = self.embedder(x) if self.embedder is not None else x
-        if batch is None:
-            batch = torch.zeros(x.size(0), dtype=torch.int64, device=x.device)
-        return super().forward(x, edge_index, batch=batch)
+        return "{}({}, {})".format(
+            self.__class__.__name__, self.in_channels, self.out_channels
+        )
 
 
 def build_model(args, features, classes):
-    if args.pooling == Pooling.HGPSL:
-        return HGPSLModelParametrized(args, features, classes)
-    else:
-        return GNNModel(args, features, classes)
+    return GNNModel(args, features, classes)
