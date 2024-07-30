@@ -1,6 +1,5 @@
 .ipynb_checkpoints
 __pycache__/
-.env
 .comet.config
 
 # Training and tuning outputs
