@@ -1,102 +1,129 @@
 # Hybrid Quantum or Purely Classical? Assessing the Utility of Quantum Feature Embeddings
 
-Paper: coming soon...
+This repository is the official implementation of "Hybrid Quantum or Purely Classical? Assessing the Utility of Quantum Feature Embeddings" written by J. Simon Richard (link to paper coming soon). 
 
-Cite: coming soon...
+This paper shows that higher performing and more efficient models can be achieved without the use of quantum machine learning, as suggested by Xu et al. in their paper [Quantum Feature Embeddings for Graph Neural Networks](https://hdl.handle.net/10125/107303).
 
-### Results
+## Requirements
 
-The raw results data have been saved (and checked into `git`) at the paths following this form: `./study_outputs/<dataset name>/results.json`.
+This project uses Docker Compose to run a Postgres database for Optuna. To install Docker Compose, follow the instructions [here](https://docs.docker.com/compose/install/).
 
-## Setting up the virtual environment
-
-First, create a virtual environment and install the requirements:
-
+We also recommend creating a new python environment using `conda` or `virtualenv`. To create a new `virtualenv` environment named `qfe_exp_env`, run the following command:
 ```bash
 python -m venv qfe_exp_venv
 source qfe_exp_venv/bin/activate
-pip install -r requirements.txt
 ```
-
-If you find that a dependency is missing from `requirements.txt`, please open an issue or PR.
 
 ### Installing the virtual environment into Jupyter
 
-To use the virtual environment in Jupyter/JupyterLab (not VSCode), run the following command while the venv is activated:
+To use the `virtualenv` environment in Jupyter/JupyterLab (not VSCode), run the following command while the venv is activated:
 ```bash
 python -m ipykernel install --user --name=qugcn_venv
 ```
-
 Do not do this if using VSCode; it will detect the python venv on its own. Installing the kernel will just make it show up twice.
+
+### Installing pip requirements
+
+```setup
+pip install -r requirements.txt
+```
+If you find that a dependency is missing from `requirements.txt`, please open an issue or PR.
+
 
 ## Data
 
 This project uses the `PROTEINS` and `ENZYMES` datasets from http://graphlearning.io. Since both of these are included in the [PyTorch Geometric](https://pytorch-geometric.readthedocs.io/en/latest/notes/datasets.html) library, you do not have manually download them. Instead, just run any of the scripts in this repo and the datasets will be automatically downloaded into the `data/` directory.
 
+
 ## Training
 
-### Running individual experiments
+First, you will need to run hyperparameter tuning using Optuna. Alternatively, you can download the hyperparameters from Zenodo (link coming soon).
 
-To run individual experiments, you may use the `train.py` script. However, I would recommend skipping to the section on "running individual experiments with a test included."
-
-Start by running
-```bash
-python train.py --help
-```
-to see the available options.
-
-For example, to run a single experiment with the default hyperparameters (the hyperparameters below do not have defaults), run the following command:
-```bash
-python train.py --dataset PROTEINS --embedder QFE-exp --model GCN --pooling sum
-```
-
-### Running Hyperparameter Tuning
-
-A single script is used to run all of the Optuna studies used for tuning hyperparameters on a given dataset: `run_strudies.py`. However, before you start, make sure to start the database Optuna requires for running studies in parallel:
+To run the Optuna studies, you will first need to start the PostgreSQL database for Optuna. That can be done using the following command:
 ```bash
 docker compose up -d
 ```
 
-Then, run the script:
+Then you can start the studies on the PROTEINS dataset (or the ENZYMES dataset, by replacing "PROTEINS" with "ENZYMES") using the following command: 
 ```bash
-python run_studies.py --dataset PROTEINS
+python run_studies.py -d PROTEINS
 ```
+This will run five-fold cross-validation for each embedder type proposed in the paper:
+* QFE-exp
+* QFE-probs
+* MLP-2^D
+* MLP-D
+* none
 
-If you want to run multiple studies in parallel, simply open another terminal and run the same command.
+> **Note:** For any of the python scripts in this repo, you can use the `-h` flag to see the available options.
 
-To see optuna's current progress, open the dashboard with the following command:
+To view the progress of the studies in real time, you can use the following command:
 ```bash
 ./optuna_dashboard.sh
 ```
 
-## Testing
-
-### Running individual experiments with a test included
-
-To run individual tests, you may use the `test.py` script. Start by running
+Once the studies are complete, use the following command to extract the study data from the Optuna database:
 ```bash
-python test.py --help
+python get_data_from_optuna.py -d PROTEINS
 ```
-to see the available options.
+The results will be saved to `./study_outputs/dataset-PROTEINS/study_data.json`.
 
-You may notice that the options for `test.py` are the same as those for `train.py`. Because training a single model is fast, I didn't implement a load-from-file option for `test.py`. So, when ever you run `test.py`, it will first train the model then test it.
-
-For example, to run a single test with the default hyperparameters (the hyperparameters below do not have defaults), run the following command:
+Once this is complete, you can close the Optuna database using the following command:
 ```bash
-python test.py --dataset PROTEINS --embedder QFE-exp --model GCN --pooling sum
+docker compose down
 ```
 
-### Running all tests
-
-To run all tests for the PROTEINS dataset, run the following command:
+Next, you will need to retrain the best models found by Optuna. This can be done using the following command:
 ```bash
-python test_from_studies.py --dataset PROTEINS
+python train_from_study_data.py -d PROTEINS
 ```
-Once the tests are complete, the results will be saved as a JSON file to `./study_outputs/dataset-PROTEINS/results.json`.
+The model weights will be saved in `./study_outputs/dataset-PROTEINS/`.
 
-To run all tests for the ENZYMES dataset, replace `PROTEINS` with `ENZYMES` in the command above.
+### Training single models
+
+If you wish to train one model at a time, you can use the `train.py` script. Run the following command to learn more about the available options:
+```bash
+python train.py --help
+```
+
+### Reproducibility
+
+I was unable to achieve completely reproducible training on my machine; your milage may vary.
 
 
-### Reproducibility Issues
+## Evaluation
 
-I was unable to achieve completely reproducible runs on my machine; your milage may vary.
+To evaluate each of the five-fold cross-validation models on their respective test datasets, run the following command:
+```bash
+python eval_from_study_models.py -d PROTEINS
+```
+
+### Evaluating single models
+
+To evaluate a single model, the `eval.py` script can be used. Run the following command to learn more about the available options:
+```bash
+python eval.py --help
+```
+
+
+## Model Weights
+
+You can download the model weights we used on Zenodo (link coming soon).
+
+
+## Results
+
+Using the `best_all` utility function, we achieve the following performance on the PROTEINS dataset:
+![](generated_images/PROTEINS-best_all.svg)
+
+Using the `best_all` utility function, we achieve the following performance on the ENZYMES dataset:
+![](generated_images/ENZYMES-best_all.svg)
+
+More results are discussed in the paper.
+
+
+## Contributing
+
+This repository is released under the MIT license. See [LICENSE](LICENSE) for additional details.
+
+Please don't hesitate to open an issue or pull request if you find a bug.

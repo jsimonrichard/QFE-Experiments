@@ -84,6 +84,7 @@ if __name__ == "__main__":
 
     parser = argparse.ArgumentParser(description="Run all studies")
     parser.add_argument(
+        "-d",
         "--dataset",
         action=EnumAction,
         enum_type=Dataset,
