@@ -113,6 +113,8 @@ You can download the model weights we used on Zenodo (link coming soon).
 
 ## Results
 
+The following images were generated using the [visualize_results.ipynb](visualize_results.ipynb) notebook, and can be found (along with more results figures) in the [generated_images](generated_images) directory.
+
 Using the `best_all` utility function, we achieve the following performance on the PROTEINS dataset:
 ![](generated_images/PROTEINS-best_all.svg)
 
