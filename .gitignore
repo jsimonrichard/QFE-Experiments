@@ -5,7 +5,7 @@ __pycache__/
 
 # Training and tuning outputs
 checkpoints/
-study_outputs/
+study_outputs*/
 
 # Venv
 qfe_exp_venv/

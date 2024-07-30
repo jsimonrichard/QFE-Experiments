@@ -2,9 +2,8 @@ import os
 import comet_ml
 import torch
 import torch.nn.functional as F
-from torch_geometric.datasets import TUDataset
 from torch_geometric.loader import DataLoader
-from sklearn.model_selection import ShuffleSplit, StratifiedKFold
+from sklearn.model_selection import StratifiedKFold
 import numpy as np
 from scipy.stats import bootstrap
 from tqdm import tqdm
@@ -13,10 +12,10 @@ import random
 import math
 from optuna import TrialPruned
 import gc
-from fvcore.nn import FlopCountAnalysis
 
 from config import get_args, get_hparams_from_args, Embedder
-from model import build_model
+from eval import count_parameters, eval_
+from model import build_model, save_model
 from dataset import get_dataset
 
 
@@ -82,7 +81,7 @@ def train(
     model,
     device,
     train_loader,
-    test_loader,
+    val_loader,
     args,
     fold,
     exp_key=None,
@@ -123,7 +122,7 @@ def train(
                 epoch=epoch,
             )
 
-        acc, loss_test, _, _ = test(model, device, test_loader)
+        acc, loss_test, _, _ = eval_(model, device, val_loader)
         if cml_exp:
             cml_exp.log_metric(f"fold-{fold}/validation/accuracy", acc, epoch=epoch)
             cml_exp.log_metric(f"fold-{fold}/validation/loss", loss_test, epoch=epoch)
@@ -161,52 +160,7 @@ def train(
             exp=cml_exp,
         )
 
-    return model
-
-
-def test(model, device, data_loader):
-    model.eval()
-    correct = 0
-    loss_test = 0.0
-    predicted = torch.tensor([]).to(device)
-    actual = torch.tensor([]).to(device)
-    for data in data_loader:
-        data = data.to(device)
-        x, edge_index, batch = data.x, data.edge_index, data.batch
-        out = model(x, edge_index, batch=batch)
-        p = out.argmax(dim=1)
-        correct += (p == data.y).sum().item()
-        loss_test += F.nll_loss(out, data.y).item()
-
-        predicted = torch.cat((predicted, p))
-        actual = torch.cat((actual, data.y))
-
-    acc = correct / len(data_loader.dataset)
-    avg_loss = loss_test / len(data_loader.dataset)
-
-    return (
-        acc,
-        avg_loss,
-        actual.to("cpu", dtype=torch.int),
-        predicted.to("cpu", dtype=torch.int),
-    )
-
-
-# https://discuss.pytorch.org/t/how-do-i-check-the-number-of-parameters-of-a-model/4325/7
-def count_parameters(model):
-    return sum(p.numel() for p in model.parameters() if p.requires_grad)
-
-
-def get_flops(model, device, x, edge_index, batch=None):
-    model.eval()
-    return FlopCountAnalysis(
-        model,
-        inputs=(
-            x.to(device),
-            edge_index.to(device),
-            None if batch is None else batch.to(device),
-        ),
-    ).total()
+    return model, epoch
 
 
 def run_experiment(args, train_ds, save_checkpoints=True):
@@ -272,7 +226,7 @@ def run_experiment(args, train_ds, save_checkpoints=True):
 
         # Run Experiment
         if not model_checkpoint or not model_checkpoint["finished"]:
-            model = train(
+            model, _ = train(
                 model,
                 device,
                 train_loader,
@@ -288,7 +242,7 @@ def run_experiment(args, train_ds, save_checkpoints=True):
             print(f"Fold {fold} already finished. Skipping training.")
 
         # TEST
-        acc, _, actual, predicted = test(model, device, val_loader)
+        acc, _, actual, predicted = eval_(model, device, val_loader)
 
         if cml_exp:
             cml_exp.log_metric(f"fold-{fold}/test/accuracy", acc)
@@ -297,6 +251,15 @@ def run_experiment(args, train_ds, save_checkpoints=True):
             )
 
         k_fold_accuracies.append(acc)
+
+        if args.model_output_dir:
+            save_model(
+                args,
+                train_ds.num_features,
+                train_ds.num_classes,
+                model,
+                f"{args.model_output_dir}/fold-{fold}-model.pth",
+            )
 
         torch.cuda.empty_cache()
         gc.collect()

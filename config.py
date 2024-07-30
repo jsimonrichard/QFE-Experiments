@@ -45,6 +45,7 @@ def get_parser():
     parser.add_argument("--seed", type=int, default=42, help="Random seed")
     parser.add_argument("--device", type=str, default="cuda:0", help="Device")
     parser.add_argument(
+        "-d",
         "--dataset",
         action=EnumAction,
         enum_type=Dataset,
@@ -96,6 +97,9 @@ def get_parser():
     parser.add_argument("--start-from", type=str, help="Start from a checkpoint")
     parser.add_argument("--comet-ml", action="store_true", help="Log to CometML")
     parser.add_argument("--offline", action="store_true", help="Use CometML offline")
+    parser.add_argument(
+        "--model-output-dir", type=str, help="Save the final models at this path"
+    )
 
     return parser
 
@@ -119,6 +123,9 @@ def gen_args(
     weight_decay: float = 5e-4,
     batch_size: int = 2048,
     comet_ml=False,
+    device="cuda",
+    seed=42,
+    k_folds=5,
 ):
     parser = get_parser()
     cli_args = [
@@ -144,6 +151,12 @@ def gen_args(
         str(batch_size),
         "--qfe-layers",
         str(qfe_layers),
+        "--device",
+        device,
+        "--seed",
+        str(seed),
+        "--k-folds",
+        str(k_folds),
     ]
     if comet_ml:
         cli_args.append("--comet-ml")

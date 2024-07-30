@@ -16,7 +16,16 @@ from train import run_experiment
 TRIALS_PER_FOLD = 200
 
 
-def objective(trial, dataset: Dataset, embedder: Embedder, fold, train_ds):
+def objective(
+    trial,
+    dataset: Dataset,
+    embedder: Embedder,
+    fold,
+    train_ds,
+    inner_fold=5,
+    device="cuda",
+    seed=42,
+):
 
     log_folder = f"./study_outputs/dataset-{dataset.value}/embedder-{embedder.value}"
     log_prefix = f"{log_folder}/fold-{fold}"
@@ -57,6 +66,9 @@ def objective(trial, dataset: Dataset, embedder: Embedder, fold, train_ds):
         lr=trial.suggest_float("lr", 1e-5, 1e-2, log=True),
         weight_decay=trial.suggest_float("weight_decay", 1e-5, 1e-3, log=True),
         batch_size=1024,
+        device=device,
+        seed=seed,
+        k_folds=inner_fold,
     )
 
     result = run_experiment(args, train_ds, save_checkpoints=False)
@@ -78,7 +90,9 @@ if __name__ == "__main__":
         required=True,
         help="Choose a dataset from: %(choices)s",
     )
+    parser.add_argument("--k-folds", type=int, default=5, help="Number of folds")
     parser.add_argument("--seed", type=int, default=42, help="Random seed")
+    parser.add_argument("--device", type=str, default="cuda", help="Device")
     args = parser.parse_args()
 
     ds = get_dataset(args.dataset)
@@ -94,7 +108,7 @@ if __name__ == "__main__":
     )
 
     # Split dataset in to train and test folds
-    folds = StratifiedKFold(n_splits=5, shuffle=True, random_state=args.seed)
+    folds = StratifiedKFold(n_splits=args.k_folds, shuffle=True, random_state=args.seed)
 
     # Outer cross-validation
     for fold, (train_index, _test_index) in enumerate(folds.split(ds, ds.y)):
@@ -123,7 +137,16 @@ if __name__ == "__main__":
                 continue
 
             study.optimize(
-                lambda trial: objective(trial, args.dataset, embedder, fold, train_ds),
+                lambda trial: objective(
+                    trial,
+                    args.dataset,
+                    embedder,
+                    fold,
+                    train_ds,
+                    inner_fold=args.k_folds,
+                    device=args.device,
+                    seed=args.seed,
+                ),
                 n_trials=TRIALS_PER_FOLD,
                 callbacks=[max_trials_callback],
             )

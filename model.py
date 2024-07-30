@@ -232,3 +232,22 @@ class SpecialGCN(MessagePassing):
 
 def build_model(args, features, classes):
     return GNNModel(args, features, classes)
+
+
+def save_model(args, features, classes, model, path):
+    torch.save(
+        {
+            "args": args,
+            "features": features,
+            "classes": classes,
+            "model_state_dict": model.state_dict(),
+        },
+        path,
+    )
+
+
+def load_model(path):
+    data = torch.load(path)
+    model = build_model(data["args"], data["features"], data["classes"])
+    model.load_state_dict(data["model_state_dict"])
+    return model
