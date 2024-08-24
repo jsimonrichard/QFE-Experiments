@@ -1,8 +1,14 @@
 # Hybrid Quantum or Purely Classical? Assessing the Utility of Quantum Feature Embeddings
 
-Data and Code Archive: ![](https://zenodo.org/badge/DOI/10.5281/zenodo.13117645.svg)
+Paper: [![Static DOI Badge](https://img.shields.io/badge/DOI-10.12688%2Ff1000research.154428.1-blue?logoColor=blue)](https://doi.org/10.12688/f1000research.154428.1)<br />
+Data and Code Archive: [![](https://zenodo.org/badge/DOI/10.5281/zenodo.13117645.svg)](https://zenodo.org/doi/10.5281/zenodo.13117644)
 
-This repository is the official implementation of "Hybrid Quantum or Purely Classical? Assessing the Utility of Quantum Feature Embeddings" written by J. Simon Richard (link to paper coming soon). 
+This repository is the official implementation of ["Hybrid Quantum or Purely Classical? Assessing the Utility of Quantum Feature Embeddings" written by J. Simon Richard](https://doi.org/10.12688/f1000research.154428.1). 
+
+Cite:
+```
+Richard JS. Hybrid Quantum or Purely Classical? Assessing the Utility of Quantum Feature Embeddings [version 1; peer review: awaiting peer review]. F1000Research 2024, 13:961 (https://doi.org/10.12688/f1000research.154428.1)
+```
 
 This paper shows that higher performing and more efficient models can be achieved without the use of quantum machine learning, as suggested by Xu et al. in their paper [Quantum Feature Embeddings for Graph Neural Networks](https://hdl.handle.net/10125/107303).
 
